@@ -1,0 +1,203 @@
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions
+END
+logarithm.m
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/logarithm.m
+END
+barlow.m
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/barlow.m
+END
+hill.m
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/hill.m
+END
+SatFunction.m
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/SatFunction.m
+END
+satexponential.m
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/satexponential.m
+END
+weber_fechner.m
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/weber_fechner.m
+END
+SNRSurfaceFit2.m
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/SNRSurfaceFit2.m
+END
+familymodel.m
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/familymodel.m
+END
+polynomial_2.m
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/polynomial_2.m
+END
+cumulative_gauss_with_mean.m
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/cumulative_gauss_with_mean.m
+END
+poisson_filter_sine.m
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/poisson_filter_sine.m
+END
+nomogram.m
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/nomogram.m
+END
+lorentz2.m
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/lorentz2.m
+END
+lorentzsum.m
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/lorentzsum.m
+END
+polynomial.m
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/polynomial.m
+END
+lorentz_three.m
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/lorentz_three.m
+END
+barlowgain.m
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/barlowgain.m
+END
+exponential.m
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/exponential.m
+END
+independence_filter.m
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/independence_filter.m
+END
+poisson_fit.m
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/poisson_fit.m
+END
+sinusoid.m
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/sinusoid.m
+END
+lorentz.m
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/lorentz.m
+END
+lorentz_single.m
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/lorentz_single.m
+END
+poisson_filter.m
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/poisson_filter.m
+END
+StraightLineFit.m
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/StraightLineFit.m
+END
+ZeroInterceptLine.m
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/ZeroInterceptLine.m
+END
+normgaussian.m
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/normgaussian.m
+END
+cumulative_gaussian.m
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/cumulative_gaussian.m
+END
+gaussian.m
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/gaussian.m
+END
+ZeroMeanGaussian.m
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/ZeroMeanGaussian.m
+END
+lorentz-single.m
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/lorentz-single.m
+END
+SNRSurfaceFit.m
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/SNRSurfaceFit.m
+END
+gaussianplusmean.m
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/nlinfit-functions/gaussianplusmean.m
+END

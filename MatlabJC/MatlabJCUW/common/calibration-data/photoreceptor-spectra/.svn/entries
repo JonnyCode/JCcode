@@ -1,0 +1,54 @@
+8
+
+dir
+378
+https://rieke-server.physiol.washington.edu/svn/matlab-analysis/trunk/common/calibration-data/photoreceptor-spectra
+https://rieke-server.physiol.washington.edu/svn/matlab-analysis
+
+
+
+2008-11-14T22:42:38.119215Z
+1
+dacc
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+ec1fb8b4-1bd7-44a3-b676-8918235e6431
+
+macaque-cone-spectra.mat
+file
+
+
+
+
+2009-02-03T17:34:07.000000Z
+cab5a9d2b32452df8b2bc64c3be340ac
+2008-11-14T22:42:38.119215Z
+1
+dacc
+has-props
+
+macaque-rod-spectra.mat
+file
+
+
+
+
+2009-02-03T17:34:07.000000Z
+bd8375781b6157b31096f4dfdd75e7d9
+2008-11-14T22:42:38.119215Z
+1
+dacc
+has-props
+

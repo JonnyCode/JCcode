@@ -1,0 +1,102 @@
+%% Quick plot
+CellName_str = '022309Ec2' ;
+epochs_str = {'[120:124]','[260:264]','[80:84]','[270:274]','[]','[]','[]','[]','[]','[]','[]','[]','[]'} ; 
+Color = {'b','r','g','k','y','c','r','g','k','y','b-.','r-.','g-.','k-.','y-.','k:'} ;
+fig_num = 1;
+
+[fp, error] = ITCInitializeAnalysis(500000, ['~/Data/mouse/',CellName_str]);
+
+clear Data stm TraceMean
+
+for set = 1:length(epochs_str) ;
+    long(set) = isempty(str2num(epochs_str{set})) ;
+end
+long = find(long == 1,1,'first') ;
+
+for set = 1:long-1 ;
+    epochNums{set} = str2num(epochs_str{set}) ;
+    for trace = 1:length(epochNums{set}) ;
+        [preData{set}{trace}, error] = ITCReadEpoch(epochNums{set}(trace), 0, fp);
+        [prestm{set}{trace}, error] = ITCReadEpochStm(epochNums{set}(trace), 0, fp);  % get the light stimulus
+        [SI{set}(trace), error] = ITCGetSamplingInterval(epochNums{set}(trace), fp); % get sampling interval
+        SI{set}(trace) = SI{set}(trace) * 1e-6; % Sampling interval in sec
+    end
+ 
+    MSI(set) = min(SI{set}) ; % find the signal with the highest sampling rate
+    
+    % interpolate all signals so they are pseudo sampled at the same rate
+    for trace = 1:length(epochNums{set}) ;
+        SLsec(trace) = SI{set}(trace)*length(preData{set}{trace}) ; % entire stimulus length in sec
+        time{set} = [MSI(set):MSI(set):SLsec(trace)] ; % time vector in sec 
+        Data{set}(trace,:) = interp1([SI{set}(trace):SI{set}(trace):SLsec],preData{set}{trace},time{set},'linear','extrap') ;  % interpolate the data
+        stm{set}(trace,:) =  interp1([SI{set}(trace):SI{set}(trace):SLsec],prestm{set}{trace},time{set},'linear','extrap') ;  % interpolate the data 
+    end
+    %TraceMean{set} = mean(Data{set},1) ;
+    TraceMean{set} = mean(Data{set},1) - mean(mean(Data{set}(1:5000),1)) ;
+    StmMean{set} = mean(stm{set},1) ;
+    
+    figure(fig_num)
+    subplot(2,1,1)
+    plot(time{set},TraceMean{set},Color{set})
+    xlabel('time (sec)')
+    ylabel('pA or mV')
+    hold on
+    subplot(2,1,2)
+    plot(time{set},StmMean{set},Color{set})
+    xlabel('time (sec)')
+    ylabel('voltage for LED')
+    hold on
+end
+
+legend(epochs_str)
+title(CellName_str)
+
+%% conductance change
+for a= 1:5
+preGexc = Trace_mean{a}/-61.10 ;
+Gexc(a,:) = preGexc - min(preGexc) ;
+Gexc(a,:) = Gexc(a,:)/max(Gexc(a,:)) ;
+
+preGinh = Trace_mean{a+5}/61.1 ;
+Ginh(a,:) = preGinh - min(preGinh) ;
+Ginh(a,:) = Ginh(a,:)/max(Ginh(a,:)) ;
+
+preGOffinh = Trace_mean{a+10}/61.1 ;
+GOffinh(a,:) = preGOffinh - min(preGOffinh) ;
+GOffinh(a,:) = GOffinh(a,:)/max(GOffinh(a,:)) ;
+
+figure(a+1) 
+plot(Gexc(a,:))
+hold on
+plot(Ginh(a,:),'r')
+plot(GOffinh(a,:),'g')
+end
+
+%%
+for a=1:5 ;
+
+GinhNull(a,:) = repmat(Ginh(a,1:10000),1,8) ;
+GexcNull(a,:) = repmat(Gexc(a,1:10000),1,8) ;
+GOffinhNull(a,:) = repmat(GOffinh(a,1:10000),1,8) ;
+
+end
+
+GinhNull = GinhNull(:,1:length(Ginh)) ;
+GexcNull = GexcNull(:,1:length(Gexc)) ;
+GOffinhNull = GOffinhNull(:,1:length(GOffinh)) ;
+
+%% g clamp comparison 
+figure
+ic = [.1:.1:7100] ;
+gc = [.03:.03:7100] ;
+plot(ic,Trace_mean{1})
+hold on
+plot(gc,Trace_mean{2},'r')
+
+%% dc G
+for a = 2:length(epochs_str) ;
+    epochNums{a} = str2num(epochs_str{a}) ;
+    [excg, inhg, error] = ITCReadEpochStmGClamp(epochNums{a}, 0, fp); % get injected G
+    Gexc(a,:) = interp1([SI{a}(1):SI{a}(1):SI{a}(1)*length(excg)],excg,time{a},'linear','extrap') ;  % interpolate the data
+    Ginh(a,:) = interp1([SI{a}(1):SI{a}(1):SI{a}(1)*length(inhg)],inhg,time{a},'linear','extrap') ;  % interpolate the data
+end

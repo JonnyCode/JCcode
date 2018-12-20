@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/matlab-analysis/!svn/ver/1/trunk/common/simple-math-functions
+END
+factorial.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/matlab-analysis/!svn/ver/1/trunk/common/simple-math-functions/factorial.m
+END
+PCorrectFromSNR.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/matlab-analysis/!svn/ver/1/trunk/common/simple-math-functions/PCorrectFromSNR.m
+END
+SNRFromPCorrect.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/matlab-analysis/!svn/ver/1/trunk/common/simple-math-functions/SNRFromPCorrect.m
+END
+InterpolateNByTwo.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/matlab-analysis/!svn/ver/1/trunk/common/simple-math-functions/InterpolateNByTwo.m
+END
+InterpolateNByFour.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/matlab-analysis/!svn/ver/1/trunk/common/simple-math-functions/InterpolateNByFour.m
+END
+CumulativeGaussInv.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/matlab-analysis/!svn/ver/1/trunk/common/simple-math-functions/CumulativeGaussInv.m
+END

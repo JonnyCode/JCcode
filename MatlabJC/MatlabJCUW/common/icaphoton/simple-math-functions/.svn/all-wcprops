@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/simple-math-functions
+END
+factorial.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/simple-math-functions/factorial.m
+END
+PCorrectFromSNR.m
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/simple-math-functions/PCorrectFromSNR.m
+END
+SNRFromPCorrect.m
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/simple-math-functions/SNRFromPCorrect.m
+END
+InterpolateNByTwo.m
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/simple-math-functions/InterpolateNByTwo.m
+END
+InterpolateNByFour.m
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/simple-math-functions/InterpolateNByFour.m
+END
+CumulativeGaussInv.m
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/simple-math-functions/CumulativeGaussInv.m
+END

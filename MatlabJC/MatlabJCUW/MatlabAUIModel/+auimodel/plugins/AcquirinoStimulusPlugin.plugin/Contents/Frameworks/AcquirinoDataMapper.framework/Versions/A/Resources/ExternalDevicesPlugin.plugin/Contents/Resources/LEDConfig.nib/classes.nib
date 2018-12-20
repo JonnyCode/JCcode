@@ -1,0 +1,14 @@
+{
+    IBClasses = (
+        {CLASS = AUIExternalDeviceBase; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {findCalibrationData = id; }; 
+            CLASS = AUILEDDevice; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {configView = NSView; }; 
+            SUPERCLASS = AUIExternalDeviceBase; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+    ); 
+    IBVersion = 1; 
+}

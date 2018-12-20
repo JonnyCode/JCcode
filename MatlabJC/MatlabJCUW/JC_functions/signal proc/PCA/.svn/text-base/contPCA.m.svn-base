@@ -1,0 +1,28 @@
+function [covar,EigVal,EigVec] = contPCA(response,stimulus,lag) ;
+
+covar = zeros(lag,lag) ;
+
+for trial = 1:size(response,1) ; % for each response
+
+for t=lag/2+1:length(response)-lag/2 ;
+    for Tau = -lag/2:lag/2-1 ;
+        for Tau2 = -lag/2:lag/2-1 ;   
+            covar(Tau+lag/2+1,Tau2+lag/2+1) = covar(Tau+lag/2+1,Tau2+lag/2+1) + response(trial,t)*stimulus(trial,t-Tau)*stimulus(trial,t-Tau2) ;
+        end
+    end
+end
+
+end
+covar = covar/size(response,1) ;
+
+figure(1);
+mesh(covar);
+
+[EigVec, EigVal] = eig(covar);
+figure(2);
+semilogy(abs(EigVal), 'o');
+
+[EigVec, EigVal] = eigs(covar, 2);
+
+figure(3);
+plot(EigVec);

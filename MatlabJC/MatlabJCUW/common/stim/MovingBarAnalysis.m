@@ -1,0 +1,51 @@
+classdef MovingBarAnalysis < AnalysisSuper
+    properties
+        amp
+        epochNums
+        threshold
+    end
+    
+    methods
+        
+        function self = MovingBarAnalysis(params)
+            self.initAnalysisSuper(params) ; 
+ 
+            self.epochNums = str2num(params.epochNums) ;         
+            
+            self.EpochDataPuller(self.epochNums,params.amp) ;
+            
+            self.EpochData = highPassFilter(self.EpochData, 1/self.SampleInterval(1), 1) ;
+            
+            self.SpikeDetect(self.EpochData,params.threshold) ;
+            
+            SpatialStimParams = hdf5load([self.DataFilePath,'_spatial.h5']) ; % load spatial stim params
+                
+            for a = 1:length(self.epochNums) ;
+                StrucString = ['params_epoch',num2str(self.epochNums(a))] ; 
+                Struct = SpatialStimParams.(StrucString) ;
+                
+                BarAngles(a,:) = Struct.BarAngle ;
+                PrePts = floor(Struct.spatial_prepts/(params.frameRate*self.SampleInterval(a))) ;
+                PostPts = floor(Struct.spatial_postpts/(params.frameRate*self.SampleInterval(a))) ;
+                
+                GroupPts = floor((length(self.SpikeTrain)-PrePts-PostPts)/length(BarAngles)) ;
+                
+                spikeRate(a,:) = DecimateWave(self.SpikeTrain(a,PrePts:end-PostPts), GroupPts)./ self.SampleInterval(a) ;
+                
+                [SortedBarAngles,i] = sort(BarAngles(a,:)) ;
+                SortedSpikeRate(a,:) = spikeRate(a,i) ;
+            end
+            
+            meanSpikeRate = mean(SortedSpikeRate) ;
+            
+            figure
+            plot(BarAngles(1:end),spikeRate(1:end),'k*')
+            hold on
+            plot(SortedBarAngles(1,:),meanSpikeRate,'r-')
+            xlabel('Bar Angle')
+            ylabel('spike rate')
+            drawnow
+            pause
+        end
+    end
+end

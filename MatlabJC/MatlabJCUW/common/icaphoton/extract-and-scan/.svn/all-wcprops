@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/extract-and-scan
+END
+LoadAndSmoothFamilyCondition.m
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/extract-and-scan/LoadAndSmoothFamilyCondition.m
+END
+SplitNoiseIntoEpochs.m
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/extract-and-scan/SplitNoiseIntoEpochs.m
+END
+ExtractFamilyData.m
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/extract-and-scan/ExtractFamilyData.m
+END
+FindEpochPts.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/extract-and-scan/FindEpochPts.m
+END
+MakeNotesFile.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/extract-and-scan/MakeNotesFile.m
+END
+ScanEpochs.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/extract-and-scan/ScanEpochs.m
+END
+DisplayEpochs.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/extract-and-scan/DisplayEpochs.m
+END
+GetEpochData.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/extract-and-scan/GetEpochData.m
+END
+FindSearchPara.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/extract-and-scan/FindSearchPara.m
+END
+ExcludeGlitches.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/extract-and-scan/ExcludeGlitches.m
+END
+InterpolateCondition.m
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/extract-and-scan/InterpolateCondition.m
+END
+GetGoodEpochData.m
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/extract-and-scan/GetGoodEpochData.m
+END
+CheckStability.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/extract-and-scan/CheckStability.m
+END
+LoadAndSmoothEpochCondition.m
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/extract-and-scan/LoadAndSmoothEpochCondition.m
+END

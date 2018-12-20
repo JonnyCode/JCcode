@@ -1,0 +1,29 @@
+function [F,Fmean] = SpikeMatcher(SpikeTimeIndex, maxDeltaTVector) ;
+
+% this function will calculate the fraction of spikes that can be matched
+% for a given max time shift, for each possible pairs of spike trains.
+% spiketimeindex is a cell array of spike times.  maxDeltaTVector, is a
+% vector of the max time shifts.
+
+% JC 4/28/09
+F = nans(sum([1:length(SpikeTimeIndex)-1]),length(maxDeltaTVector)) ; % prepare matrix
+
+pair = 0 ; 
+for a = 1:length(SpikeTimeIndex) ; % for spike train
+    for b = a+1:length(SpikeTimeIndex) ; % for each possible pairing
+        pair = pair+1 ;
+        D = abs(repmat(SpikeTimeIndex{a}',1,length(SpikeTimeIndex{b})) - repmat(SpikeTimeIndex{b},length(SpikeTimeIndex{a}),1)) ; % time difference between all spikes in two spike trains
+            for c = 1:length(maxDeltaTVector) ; % for each delta t
+                N = min(sum(sum(D<=maxDeltaTVector(c),1)~=0),sum(sum(D<=maxDeltaTVector(c),2)~=0)) ; % min(number of rows D<t, number of columns D<t) = number of possible matches
+                F(pair,c) = N/max(length(SpikeTimeIndex{a}),length(SpikeTimeIndex{b})) ; % fraction of spikes matches
+            end
+    end
+end
+
+Fmean = mean(F,1) ; % mean of all pairs
+
+
+% figure
+% plot(maxDeltaTVector,F,'k')
+% hold on
+% plot(maxDeltaTVector,Fmean,'r')

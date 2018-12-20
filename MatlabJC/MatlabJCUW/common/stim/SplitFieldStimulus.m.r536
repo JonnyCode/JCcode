@@ -1,0 +1,52 @@
+classdef SplitFieldStimulus < SpatialStimSuper
+    properties %separate into private and public (params needed from IGOR)
+        intensityRight    % Bar cannot be wider than 424 pixels
+        intensityLeft   % Bar cannot be larger than 212 pixels
+        preFramesRight    % pixels/frame
+        preFramesLeft % number of frames between next bar angle presented
+    end
+    properties (Hidden = true)
+        i
+
+    end
+    methods
+        
+        function self = SplitFieldStimulus(windPtr, params)
+            self.initSuper(windPtr, params) ;
+            
+            self.intensityRight = gammaCorrect(params.intensityRight,params.gammaTable);
+            self.intensityLeft = gammaCorrect(params.intensityLeft,params.gammaTable);
+            
+            self.preFramesRight = params.preFramesRight ;
+            self.preFramesLeft = params.preFramesLeft ;
+            
+            self.i = rem(self.callCounter,length(self.intensityRight)) ;
+            if self.i==0 ;
+                self.i=length(self.intensityRight);
+            end
+            
+            if self.rand_behavior==1 ;
+                R = randperm(length(self.intensityRight));
+                self.i = R(self.i) ;
+            end
+            
+            evalin('caller',['paramsStruct.intensityRight = ' num2str(self.intensityRight(self.i)) ';']); %save the actual diameter used
+            evalin('caller',['paramsStruct.intensityLeft = ' num2str(self.intensityLeft(self.i)) ';']); %save the actual diameter used            
+        end
+        
+        function drawParams = nextStimFrame(self)
+            frame = self.frameCounter-self.spatial_prepts ;
+            M=ones(3,4)*self.spatial_meanLevel ;
+            
+            if frame>self.preFramesRight ;
+                M(:,3:4)= self.intensityRight(self.i) ;
+            end
+            
+            if frame>self.preFramesLeft ;
+                M(:,1:2)= self.intensityLeft(self.i) ;
+            end
+            
+            drawParams.tex = Screen('MakeTexture', self.windPtr, M);
+        end
+    end
+end

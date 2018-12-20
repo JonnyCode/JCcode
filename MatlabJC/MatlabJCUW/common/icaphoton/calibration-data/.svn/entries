@@ -1,0 +1,40 @@
+8
+
+dir
+378
+https://rieke-server.physiol.washington.edu/svn/matlab-analysis/trunk/common/icaphoton/calibration-data
+https://rieke-server.physiol.washington.edu/svn/matlab-analysis
+
+
+
+2009-07-08T01:07:47.712862Z
+283
+Greg
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+ec1fb8b4-1bd7-44a3-b676-8918235e6431
+
+other
+dir
+
+suction-rig
+dir
+
+photoreceptor-spectra
+dir
+
+slice-rig
+dir
+

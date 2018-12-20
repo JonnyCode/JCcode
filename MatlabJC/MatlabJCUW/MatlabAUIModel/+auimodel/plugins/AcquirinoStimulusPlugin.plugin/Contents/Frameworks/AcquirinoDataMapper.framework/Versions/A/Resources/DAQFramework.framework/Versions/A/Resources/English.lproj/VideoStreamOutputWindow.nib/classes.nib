@@ -1,0 +1,18 @@
+{
+    IBClasses = (
+        {
+            CLASS = AUIIOStreamInfo; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {externalDevice = id; externalDeviceOwner = id; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            CLASS = AUIVideoStreamInfo; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {windowPresentationView = NSOpenGLView; }; 
+            SUPERCLASS = AUIIOStreamInfo; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+    ); 
+    IBVersion = 1; 
+}

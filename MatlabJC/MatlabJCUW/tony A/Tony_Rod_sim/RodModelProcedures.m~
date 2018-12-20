@@ -1,0 +1,289 @@
+%----------------------------------------------------------------------------------
+% Rod Modeling Main Analysis
+%
+%	Contents:
+%		??Flash family and intensity response analysis
+%		?? Flash Response with background mean Analysis: integration time,
+%           time-to-peak, 
+%
+%	Revision History:
+%		Created 5/21/02 FMR
+%
+%       Tony Azevedo 11/2/06
+%           - no family conditions
+%           - 20Hz filtering
+%           - stability checks
+%           - statistics and random superposition of stuff
+%       Tony Azevedo 11/3/06
+%           - stimulus creation and store in structure
+%           - transform calculations and storage
+%----------------------------------------------------------------------------------
+CellInfo.CellFile = '~/Data/Tony/102606c1' % Jon added *****
+
+% read in and smooth EpochCondition data
+CellInfo = LoadCIData(CellInfo, 1);
+FreqCutoff = 20;
+DecimatePts = 1;
+EpochCondition = LoadAndSmoothEpochCondition(CellInfo, FreqCutoff, DecimatePts);
+
+%----------------------------------------------------------------------------------
+% STABILITY CHECKS AND THE LIKE
+%----------------------------------------------------------------------------------
+
+% check long term stability of recording by plotting average of all response
+% and averages of each 1/4 of experiment
+label = 'Pulse';
+CheckStab =input('Check stability? 0 - no, 1 - yes...');
+if (CheckStab)
+    for cond = 1:length(EpochCondition)
+        if (strncmp(EpochCondition(cond).Label, label, length(label)) == 1)
+            disp('Checking stability over time');
+            CheckStability(CellInfo, EpochCondition(cond));
+        end
+    end
+end
+clear CheckStab;
+
+% exclude glitches
+GlitchRoutine =input('Exclude glitches? 0 - no, 1 - yes...');
+if (GlitchRoutine)
+    for cond = 1:length(EpochCondition)
+        EpochCondition(cond) = ExcludeGlitches(CellInfo, EpochCondition(cond));
+        EpochCondition(cond) = AverageAndVariance(CellInfo, EpochCondition(cond));
+    end
+end
+clear GlitchRoutine;
+
+% superimpose each response of given type
+DispAndScan = input('Diplay Epochs and Scan Epochs? 0 - no, 1 - yes...');
+BadEpochs = 0;
+if (DispAndScan)
+    h = figure;
+    for cond = 1:length(EpochCondition)
+        plot(0);
+        hold on;
+        DisplayEpochs(EpochCondition(cond));
+        GlitchFlag = input('Continue (0) or edit (1)?');
+        if (GlitchFlag == 1)
+            [EpochCondition(cond), BadEpochs] = ScanEpochs(EpochCondition(cond), BadEpochs);
+        end
+        hold off;
+    end
+    clear h
+end
+clear BadEpochs DispAndScan;
+
+% % smoothing
+% % Note: If I already use LoadAndSmoothEpochConditions, why do I need to
+% % smooth again?
+% FreqCutoff = 60;
+% for cond = 1:length(EpochCondition)
+% 	Condition = ApplyFrequencyCutoff(EpochCondition,EpochCondition(cond), FreqCutoff);
+% 	Condition = AverageAndVariance(EpochCondition,EpochCondition(cond));
+% 	EpochCondition(cond) = Condition;
+% end
+
+%----------------------------------------------------------------------------------
+% FLASH RESPONSE with mean on, called "Pulse"
+%----------------------------------------------------------------------------------
+
+label = 'Pulse';
+view = input('View mean and variance? 0 - no, 1 - yes...');
+
+if (view)
+    h = figure;
+    plot(0);
+    hold on;
+end
+    
+if (view)
+    for cond = 1:length(EpochCondition)
+        if (strncmp(EpochCondition(cond).Label, label, length(label)) == 1)
+            clear tme;
+            tme = 1:length(EpochCondition(cond).AverageResponse);
+            tme = (tme - FindSearchPara(EpochCondition(cond), 'PrePoints')) * FindSearchPara(EpochCondition(cond), 'SampInterv') * EpochCondition(cond).DecimatePts * 1e-6;
+            plot(tme, -EpochCondition(cond).AverageResponse);
+        end
+    end
+    hold off;
+end
+
+% statistics
+flash = 1;
+for cond = 1:length(EpochCondition)
+	if (strncmp(EpochCondition(cond).Label, label, length(label)) == 1)
+		TimeStep = FindSearchPara(EpochCondition(cond), 'SampInterv') * EpochCondition(cond).DecimatePts * 1e-6;
+		PrePts = FindSearchPara(EpochCondition(cond), 'PrePoints') / EpochCondition(cond).DecimatePts;
+		CellParameters.IntegrationTime(flash) = sum(-EpochCondition(cond).AverageResponse) / max(-EpochCondition(cond).AverageResponse);
+		CellParameters.IntegrationTime(flash) = CellParameters.IntegrationTime(flash) * TimeStep;
+		[MaxAmp, maxloc] = max(-EpochCondition(cond).AverageResponse);
+		CellParameters.TimeToPeak(flash) = (maxloc - PrePts) * TimeStep;
+		flash = flash + 1;
+	end
+end
+
+clear flash TimeStep PrePts;
+
+% superimpose variance and mean squared
+if (view)
+    for cond  = 1:length(EpochCondition)
+        if (strncmp(EpochCondition(cond).Label, label, length(label)) == 1)
+            clear tme;
+            tme = 1:length(EpochCondition(cond).AverageResponse);
+            tme = (tme - FindSearchPara(EpochCondition(cond), 'PrePoints')) * FindSearchPara(EpochCondition(cond), 'SampInterv') * EpochCondition(cond).DecimatePts * 1e-6;
+            plot(tme, EpochCondition(cond).AverageResponse.^2, tme, EpochCondition(cond).VarianceResponse);
+            pause;
+        end
+    end
+    close(h);
+end
+clear view h tme maxloc MaxAmp;
+
+%------------------------------------------------------------
+% Stimuli (especially important for convolution of noise stimulus)
+%------------------------------------------------------------
+
+% Create and store stimulus plot for each Epoch Condition.
+disp('Creating and storing stimuli...')
+for cond = 1:length(EpochCondition)
+    if (strncmp(EpochCondition(cond).Label{1}, 'Noise', length('Noise')) == 1)
+        EpochCondition(cond).StimulusVector = StoreNoiseStimuli(EpochCondition,CellInfo.CellFile,cond);
+    else
+        EpochCondition(cond).StimulusVector = StoreStimuli(EpochCondition,cond);
+    end
+end
+
+%------------------------------------------------------------
+% Begin Fourier Transform analysis of the pulses
+%------------------------------------------------------------
+
+% transform the random stimuli
+disp('Transforming stimuli...');
+for cond = 1:length(EpochCondition)
+    if (strncmp(EpochCondition(cond).Label{1}, 'Noise', length('Noise')) == 1)
+        EpochCondition(cond).StimulusTransform = TransformStimulus(EpochCondition,cond);
+    end
+end
+
+
+% transform the conditions
+disp('Transforming data...');
+s = '';
+for cond = 1:length(CellInfo.EpochCondition)
+    s = strcat(s,sprintf('\n%s',CellInfo.EpochCondition(cond).Label{1}));
+end
+disp(s);
+no = input('How many condition types? Return for 1...');
+for i = 1:no 
+    label = input('Which label? Hit return for Pulse...','s');
+    if (isempty(label))
+        label = 'Pulse';
+    end
+    for cond = 1:length(EpochCondition)
+        if (strncmp(EpochCondition(cond).Label{1}, label, length(label)) == 1)
+            disp(strcat('Transforming ',EpochCondition(cond).Label{1}));
+            EpochCondition(cond).AverageTransform = TransformData(EpochCondition,cond);
+        end
+    end
+    disp(sprintf('%g more condition types',(no-i)));
+end
+
+clear s no label i
+
+clear cond FreqCutoff DecimatePts;
+return
+
+        
+% What does this do?
+FlashStrength = EpochCondition(1).UserInfo.StimulusAmp;    
+%%%  I'm missing this field
+ReferenceCond = 1;
+for cond = 1:length(EpochCondition)
+	if (strncmp(EpochCondition(cond).Label, label, length(label)) == 1)
+		if (EpochCondition(cond).UserInfo.StimulusAmp < FlashStrength)
+			FlashStrength = EpochCondition(cond).UserInfo.StimulusAmp;
+			ReferenceCond = cond;
+		end
+	end
+end
+
+return
+
+if (EpochCondition(ReferenceCond).UserInfo.StimulusAmp == 0)
+	DarkNoiseFlag = 0;
+else
+	DarkNoiseFlag = 1;
+end
+
+EndPoint = 350;
+StartPoint = 150;
+if (DarkNoiseFlag)		% if no dark noise
+	cnt = 1;
+else
+	cnt = 0;
+end
+
+figure(2)
+clear NumIsoms;
+for cond = 1:length(EpochCondition)
+	if (cond ~= ReferenceCond)
+		if (strncmp(EpochCondition(cond).Label, label, length(label)) == 1)
+			cnt = cnt + 1;
+			VarianceResponse = EpochCondition(cond).VarianceResponse - EpochCondition(ReferenceCond).VarianceResponse;
+			MeanResponse = EpochCondition(cond).AverageResponse - EpochCondition(ReferenceCond).AverageResponse;
+			MeanSquared = MeanResponse.^2;
+			var = cumsum(VarianceResponse);
+			avesq = cumsum(MeanSquared);
+
+			Isoms = (avesq(EndPoint) - avesq(StartPoint)) / (var(EndPoint) - var(StartPoint));
+
+			tme = 1:length(var);
+			tme = tme * 0.001;
+			subplot(1, 2, 1)
+			plot(tme, VarianceResponse, tme, MeanSquared / Isoms)
+			pause;
+			if (DarkNoiseFlag) 		% if no dark noise			
+				FlashStrength1 = FindSearchPara(EpochCondition(ReferenceCond), 'StmAmp');
+				FlashStrength2 = FindSearchPara(EpochCondition(cond), 'StmAmp');
+				NumIsoms(cnt) = Isoms;		
+	
+				NumIsoms(cnt) = Isoms * FlashStrength2 / (FlashStrength2 - FlashStrength1);
+				if (cnt == 2)
+					NumIsoms(1) = Isoms * FlashStrength1 / (FlashStrength2 - FlashStrength1);
+				else
+					NumIsoms(1) = NumIsoms(1) + Isoms * FlashStrength1 / (FlashStrength2 - FlashStrength1);
+				end
+				NumIsoms(1) = NumIsoms(1) / (cnt-1);
+			else
+				NumIsoms(cnt) = Isoms;
+			end
+		end
+	end
+end
+
+cnt = 1;
+for cond = 1:length(EpochCondition)
+	if (cond ~= ReferenceCond)
+		if (strncmp(EpochCondition(cond).Label, label, length(label)) == 1)
+			if (cnt == 1)
+				ElementaryResponse = EpochCondition(cond).AverageResponse;
+				CollectingArea = NumIsoms(cnt) / EpochCondition(cond).UserInfo.StimulusAmp;
+			else
+				ElementaryResponse = ElementaryResponse + EpochCondition(cond).AverageResponse;
+				CollectingArea = CollectingArea + NumIsoms(cnt) / EpochCondition(cond).UserInfo.StimulusAmp;
+			end
+			cnt = cnt + 1;
+		end
+	end	
+end
+ElementaryResponse = ElementaryResponse / (cnt * mean(NumIsoms));
+CollectingArea = CollectingArea / cnt;
+if (0)
+	CollectingArea = CollectingArea / (2.64e5 * 3.5 / 3365);
+end
+figure(2)
+subplot(1, 2, 2)
+plot(tme, -ElementaryResponse);
+CellParameters.ElementaryResponse = -ElementaryResponse;
+CellParameters.CollectingArea = CollectingArea;
+CellParameters

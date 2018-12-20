@@ -1,0 +1,1 @@
+../calibration-data/suction-rig/DARK.TXT

@@ -1,0 +1,860 @@
+% This script will analyze recorded conductances and cell attached spikes
+% from multiple random seed experiments
+
+% JC 8/25/08
+% modified JC 10/26/08
+
+% Get the following outputs (1= get output, 0= don't) 
+% assess cell spike response basic (CA only)
+perform.CellCheckCA = 0 ;
+
+% Burst and spike data from ca
+perform.BStatCA = 0 ;
+
+% interspike interval distribution
+perform.ISIdisCA =0 ;
+
+% variance of conductances
+perform.VarGcheckExc = 0 ;
+perform.VarGcheckInh = 0 ;
+
+% Linear filter from light to conductance
+perform.LinFExc = 0 ; % control G Exc
+perform.LinFInh = 0 ; % control G Inh
+perform.LinFInhApb = 0 ; % OFF channel inh isolated via APB
+
+% Linear Nonlinear model from light to spike
+perform.LNfiltersCA = 0 ; 
+
+% Prespike stimuli from cell attached data
+perform.STACA = 0 ;
+
+% Prespike conductance (from Vclamp)
+perform.STGCA = 0 ;
+
+% prespike currents (from Iclamp)
+perform.STIIC = 0 ;
+
+% power spectrum of exc and inh
+perform.PSg = 0 ;
+
+% autocorrelation
+perform.ACInh = 0 ;
+perform.ACExc = 0 ;
+
+% cross correlation
+perform.CCexcinh = 0 ; % control exc and inh
+perform.CCexcOffinh = 0 ; % control exc and apb inh 
+perform.CCexcOninh = 0 ; % conrtrol exc and apb-control inh 
+
+% alternating voltage experiments
+perform.AltVanalysis = 1 ;
+perform.AltVanalysisNegCorr = 0 ;
+perform.AltVanalysisPosCorr = 0 ;
+
+% IV steps
+perform.IVSteps = 0 ;
+perform.IVStepsAPV = 0 ;
+
+% integrate model on simultaneous and shuffled conductances
+perform.LIFforSimG = 0 ;
+
+% using the following cells...
+for A = [39] ;    
+%% Cells for analysis 
+
+Input(1).cellname = '060908Bc1' ; % took first set G for dc from this cell
+Input(1).CA = '[79:108]' ;
+Input(1).Exc = '[154:183]' ; % VC at inh reversal pot
+Input(1).Inh = '[213:242]' ;
+Input(1).InhApb = '[313:316]' ; % VC at exc revesal with APB present
+
+Input(2).cellname = '060908Bc4' ; % 
+Input(2).CA = '[45:74]' ;
+Input(2).Exc = '[110:139]' ; % VC at inh reversal pot
+Input(2).Inh = '[163:182]' ;
+Input(2).InhApb = '[212:241]' ; % VC at exc revesal with APB present
+Input(2).ExcApb = '[270:289]' ;
+Input(2).InhWash = '[541:570]' ; % inh post apb
+Input(2).ExcWash = '[616:645]' ;
+
+Input(3).cellname = '061008Bc3' ; % 
+Input(3).CA = '[87:126]' ;
+Input(3).Exc = '[166:185]' ; % VC at inh reversal pot
+Input(3).Inh = '[210:229]' ;
+Input(3).InhApb = '[270:289]' ; % VC at exc revesal with APB present (30mV)
+Input(3).InhApb2 = '[304:323]' ; % VC at another attempted reversal pot (40mV) 
+Input(3).ExcApb = '[350:369]' ;
+
+Input(4).cellname = '061008Bc4' ; % took second set of G for DC from this cell (epochs: 111:115,152:156,217:221), sfn poster example epochs(106,147,212) 
+Input(4).CA = '[42:81]' ;
+Input(4).Exc = '[106:125]' ; % VC at inh reversal pot
+Input(4).Inh = '[147:166]' ;
+Input(4).InhApb = '[212:251]' ; % VC at exc revesal with APB present
+Input(4).ExcApb = '[292:325]' ;
+
+Input(5).cellname = '061008Bc2' ; % 
+Input(5).CA = '[25:64]' ;
+Input(5).Exc = '[131:150]' ; % VC at inh reversal pot
+Input(5).Inh = '[194:213]' ;
+
+Input(6).cellname = '060908Bc2' ; % 
+Input(6).CA = '[40:69]' ;
+Input(6).Exc = '[109:138]' ; % VC at inh reversal pot
+Input(6).Inh = '[165:174]' ;
+
+Input(7).cellname = '060908Bc5' ; % 
+Input(7).CA = '[39:68]' ;
+Input(7).Exc = '[109:128]' ; % VC at inh reversal pot
+Input(7).Inh = '[158:177]' ; % lost access and was not great throughout
+
+Input(8).cellname = '060908Bc6' ; % 
+Input(8).CA = '[30:59]' ; % did not have a blue mean on during stim
+Input(8).Exc = '[91:120]' ; % VC at inh reversal pot
+Input(8).Inh = '[184:193]' ;
+
+Input(9).cellname = '061008Bc1' ; % 
+Input(9).CA = '[50:89]' ;
+Input(9).Exc = '[143:162]' ; % VC at inh reversal pot
+
+Input(10).cellname = '060908Bc3' ; % 
+Input(10).CA = '[45:74]' ;
+
+% current clamped On parasol example
+Input(11).cellname = '061908Bc1b' ;  % good patch 
+Input(11).IC = '[34:43,110:124]' ;
+
+Input(11).cellname = '030408Ac1' ; % midget cell from Fred
+Input(11).Inh = '[116:135]' ;
+Input(11).Exc = '[96:115]' ;
+
+% Mouse cells alt Voltage experiments
+Input(12).cellname = '020609Ec1' ; % ON-Off bistrat altvolt Rs = 18MOhms seems to be nice cell but possibly inaccurate reversal pots and short prestim time
+Input(12).Steps = {'[222:226]','[217:221]','[212:216]','[227:231]','[232:236]','[237:241]','[242:246]','[247:251]'} ;
+Input(12).SpepsPots = '[-80,-60,-45,-20,0,10,20,40]' ;
+Input(12).Alt = '[180:194]' ; % attempted isolation (-50,15) reversal may have been closer to 5 or 10
+Input(12).AltPosCorr = '[252:266]' ; % attempted positive correlation (beyond reversal pots) (-50,40)
+Input(12).AltNegCorr = '[195:209]' ; % attempted negative correlation (between reversal pots) (-45,15)
+
+Input(13).cellname = '020809Ec1' ; % on-off bistrat alt volt Rs=26 Mohms 
+Input(13).Alt = '[69:83]' ; %(-50,5)
+Input(13).AltNegCorr = '[134:148]' ; %(-40,5)
+Input(13).Steps = {'[19:23]','[34:38]','[29:33,94:98]','[89:93]','[24:28,84:88]','[39:43]','[44:48]','[109:113]','[114:118]','[49:53,119:123]','[124:128]','[54:58,129:133]','[59:63]'} ;
+Input(13).StepsPots = '[-60,-55,-50,-45,-40,-35,-25,-20,-10,-5,0,5,15]' ;
+
+Input(14).cellname = '021209Ec1' ; % on-off bistrat alt volt Rs approx 20Mohms nice cell (alt v in apv) good example of gNMDA
+Input(14).Steps = {'[85:89,165:169]','[160:164]','[80:84,155:159]','[180:184]','[150:154,175:179]','[170:174]','[90:94,145:149]','[140:144,185:194]','[95:99]','[135:139]','[130:134]','[100:104,125:129]','[115:124]','[110:114]','[105:109]'} ;
+Input(14).StepsPots = '[-80,-70,-60,-55,-50,-45,-40,-30,-20,-10,-5,0,5,10,20]' ; % the holding potentials for the steps above
+Input(14).StepsAPV = {'[260:264]','[265:269]','[270:274]','[275:279]','[365:369,375:379]','[280:284,355:359,370:374]','[360:364]','[250:259,285:289]','[290:294,350:354]','[345:349]','[295:299,330:334]','[300:304,335:339]','[305:309,340:344]','[310:314]','[315:319]','[320:324]','[325:329]'} ;
+Input(14).StepsAPVPots = '[-80,-70,-60,-50,-45,-40,-30,-25,-20,-15,-10,-5,0,5,10,15,20]' ;
+%Input(14).AltNegCorr = '[380:394]' ; %(-45,-20)
+Input(14).AltNegCorr = '[425:439]' ; %(-45,-30)
+Input(14).Alt = '[395:409,440:454]' ; %(-45,0)
+Input(14).AltPosCorr = '[410:424]' ; %(-45,20)
+
+Input(15).cellname = '021209Ec2' ; % on-off response but image may not be bistrat, seem to have lost access after steps causing contamination and correlations are negative 
+Input(15).Steps = {'[20:24]','[15:19]','[30:34]','[25:29]','[35:39,55:59,80:84]','[40:44,50:54]','[45:49]','[60:64]','[65:69]','[70:74]','[75:79]'} ;
+Input(15).StepsPots = '[-80,-60,-50,-40,-30,-20,-10,0,5,10,20]' ;
+Input(15).StepsAPV = {'[135:139]','[140:144]','[145:149]','[150:154]','[160:164]','[155:159]','[130:134,165:169]','[170:174]','[175:179]','[180:184]','[185:189]','[190:194]','[195:199]','[200:204]'} ;
+Input(15).StepsAPVPots = '[-80,-70,-60,-50,-45,-40,-30,-20,-10,-5,0,5,10,20]'
+%Input(15).Alt = '[205:219]' ; % (-45,0) w/compensation as steps above
+Input(15).Alt = '[230:244]' ; % (-45,0) no  compensation for all below too
+%Input(15).Alt = '[328:342]' ; % (-45,0)
+%Input(15).Alt = '[358:372]' ; % (-55,0) unclear if -45 or -55 is isolation
+Input(15).AltPosCorr = '[245:259]' ; % (-45,20)
+%Input(15).AltPosCorr = '[298:312]' ; % (-45,10)
+%Input(15).AltPosCorr = '[373:387]' ; % (-55,20)
+Input(15).AltNegCorr = '[260:274]' ; % (-45,-20) 
+%Input(15).AltNegCorr = '[313:327]' ; % (-45,-10)
+%Input(15).AltNegCorr = '[388:402]' ; % (-55,-20)
+
+Input(16).cellname = '021609Ec1' ; % on-off bistrat, w/ strychnine (although not always?) bad access, several mistakes on this cell
+Input(16).Steps = {'[115:119]','[110:114,120:124]','[125:129]','[130:134]','[135:139]','[140:144]','[145:149]','[150:154]','[155:159]','[160:164]','[165:169]'} ; % this previosly had APV ...
+Input(16).StepsPots = '[-80,-60,-50,-40,-30,-20,-10,0,5,10,20]' ;
+Input(16).StepsSty = {'[350:354]','[345:349,355:359]','[363:367]','[340:344]','[335:339]','[330:334]','[325:329]','[320:324]','[315:319,368:372]','[310:314,373:377,383:387]','[295:299,378:382]','[305:309]','[300:304]'} ; % these after 1min no perfusion
+Input(16).StepsStyPots = '[-80,-60,-55,-50,-40,-30,-20,-10,0,10,20,30,40]' ;
+Input(16).Alt = '[388:402]' ; %(-55,10)
+Input(16).AltPosCorr = '[403:417]' ; %(-55,40)
+Input(16).AltNegCorr = '[418:429]' ; %(-55,-20) lost access before recording 5 sets
+
+Input(17).cellname = '020409Ec1' ; % on-off bistrat, 
+% Input(17).Steps = {'[61:65]','[66:70]','[71:75]','[76:80]','[81:85]','[86:90]','[91:95]'} ; % 2.25Rh from dark
+% Input(17).StepsPots = '[-60,-40,-20,0,10,20,30]' ;
+Input(17).Steps = {'[106:115]','[116:125]','[126:135]','[136:145]','[146:155]'} ; % 2.25 from 2.25 mean
+Input(17).StepsPots = '[-60,-40,-20,20,30]' ;
+Input(17).Alt = '[160:171]' ; %(-60,30)
+% Input(17)
+
+Input(18).cellname = '020409Ec2' ; % on-off bistrat, 
+Input(18).Steps = {'[64:68]','[74:78]','[69:73,134:138]','[59:63]','[54:58,139:143]','[144:148]','[94:98,149:153]','[84:88,174:178]','[79:83,154:158]','[89:93,169:173]','[159:163]'} ;
+Input(18).StepsPots = '[-70,-65,-60,-50,-40,-20,0,10,20,30,40]' ;
+Input(18).Alt = '[114:128]' ; %(-60,30)
+
+Input(19).cellname = '020409Ec3' ; % on-off bistrat
+Input(19).Steps = {'[53:57]','[48:52]','[58:62]','[83:87]','[78:82]','[73:77]'} ;
+Input(19).StepsPots = '[-70,-60,-40,-20,0,20]' ;
+
+Input(20).cellname = '030409Ec3' ; % on-off bistrat w/ gabazine
+Input(20).Alt = '[211:225]' ; % exc rev 40 
+Input(20).AltPosCorr = '[266:280]' ; % hold 55 (true maybe 50)
+Input(20).AltNegCorr = '[331:336]' ; % hold 35 (true maybe 50)
+
+Input(21).cellname = '030409Ec2' ; % on-off bistrat
+Input(21).Alt = '[116:130]' ;
+
+Input(22).cellname = '030409Ec1' ; % off sustained
+Input(22).Alt = '[128:142]' ; %(-40,20)
+Input(22).AltPosCorr = '[239:253]' ; %(-60,20)
+
+Input(23).cellname = '030609Ec2' ; % on-off bistrat + gabazine/stychnine and apv good cell
+Input(23).Alt = '[231:245]' ; % (-40,35)
+Input(23).AltPosCorr = '[282:296]' ; %(-40,55)
+Input(23).AltNegCorr = '[347:361]' ; % (-40,40)
+Input(23).Steps = {'[70:74]','[75:79,90:94]','[85:89]','[80:84,95:99]','[100:104]','[105:114]','[115:124]'} ; % before gabazine,stychnine and apv,without a mean 
+Input(23).StepsPots = '[-50,-40,-30,0,5,10,15]' ;
+Input(23).Steps = {'[205:209]','[160:169]','[170:179]','[185:194]','[200:204]','[180:184,195:199]'} ; % after gabazine,stychnine and apv, without a mean
+Input(23).StepsPots = '[-40,15,25,30,32,35]' ;
+
+% 030609Ec1 also has possibly useful data
+
+Input(24).cellname = '031309Ec1' ; % on-off bistrat + gabazine/stychnine and apv good cell
+Input(24).Alt = '[402:416]' ; %(-50,25)
+Input(24).AltPosCorr = '[453:467]'; %(-50,35)
+Input(24).AltNegCorr = '[543:557]' ; %(-50,25) 
+% Input(24).Steps = {'[60:69]','[70:79]','[80:84]','[85:89]','[90:94]','[95:99]'} ; % before gabazine/stychnine and apv, with a mean %THIS IS A DIFFERENT CELL!
+% Input(24).StepsPots = '[-60,0,5,10,20,30]' ;
+Input(24).Steps = {'[233:237]','[238,257]','[258:267]','[268:277]','[278:282]'} ; % before gabazine/stychinine and apv (although was present 15 minutes before), with a mean
+Input(24).StepsPots = '[-60,0,10,20,30]' ;
+Input(24).Steps = {'[363:377]','[348:352,378:387]','[353:362]','[338:347]',} ; % after inh blockade
+Input(24).StepsPots = '[-50,20,25,30]' ;
+
+Input(25).cellname = '031309Ec2' ; % on-off bistrat + gabazine/stychnine and apv good cell
+Input(25).Alt = '[251:265]' ; %(-50,30)
+%Input(25).Alt = '[381:395]' ; %(-50,30)
+Input(25).AltPosCorr = '[296:310]' ; %(-50,40)
+Input(25).AltNegCorr = '[336:350]' ; %(-50,20)
+Input(25).Steps = {'[65:74]','[85:89]','[90:99]','[75:84,101:104]','[105:109]','[110:114,120:124]','[115:119]'} ; % before gabazine/stychinine and apv, with a mean
+Input(25).StepsPots = '[-60,-20,-10,0,10,20,30]' ;
+Input(25).Steps = {'[210:214]','[170:179]','[240:244]','[180:194,245:249]','[195:209,225:239]'} ; % after inh blockade
+Input(25).StepsPots = '[-50,20,25,30,35]' ;
+
+Input(26).cellname = '031809Ec2' ; % on-off bistrat good cell (%some cell attached to noise stim)
+Input(26).Steps = {'[72:76]','[57:61,87:91]','[202:206]','[82:86,182:186,197:201]','[192:196]','[62:66,77:81,187:191]','[67:71,167:171]','[162:166]','[152:156]','[92:96,147:151,157:161]','[97:101,142:146,172:176]','[102:106,177:181]','[107:111]','[112:121]'} ; 
+Input(26).StepsPots = '[-80,-60,-55,-50,-45,-40,-20,-10,-5,0,10,20,30,40]' ;
+Input(26).Alt = '[217:231]' ; %(-55,20)
+Input(26).AltNegCorr = '[332:346]' ; %(-55,0)
+
+Input(27).cellname = '041509Fc2b' ; % on-off bistrat in Ach block (this cell has step data too)
+Input(27).Alt = '[30:44]' ;
+
+Input(28).cellname = '041509Fc3' ; % on-off bistrat in Ach block (this cell has step data too)
+Input(28).Alt = '[130:144]' ;
+
+% below is midget alt v exp
+Input(29).cellname = '042809Ec1' ; % very large on midget with big g, access may be limited by space clamp
+Input(29).Alt = '[149:163]' ;
+
+Input(30).cellname = '042809Ec4' ; % on midget, bad access
+Input(30).Alt = '[184:198]' ;
+
+Input(31).cellname = '042809Ec5' ; % on midget, bad access
+Input(31).Alt = '[110:124]' ;
+
+Input(32).cellname = '042909Ec1' ; % large on midget, good access but had on-off exc and inh
+Input(32).Alt = '[72:86]' ;
+
+Input(33).cellname = '042909Ec2' ; % off midget? unhealthy cell on-off g
+Input(33).Alt = '[99:110]' ;
+
+Input(34).cellname = '042909Ec3' ; % on midget, good access (rs =9)
+Input(34).Alt = '[100:111]' ;
+
+Input(35).cellname = '042909Ec4' ; % on midget + gabaznine and stychnine
+Input(35).Alt = '[211:225]' ;
+
+Input(36).cellname = '042909Bc4' ; % on midget mulitclamp (Freds)
+Input(36).Alt = '[62:76,151:165]' ;
+
+Input(37).cellname = '042909Bc5' ; % On parasol multiclamp (rod light levels + correlations?)
+Input(37).Alt = '[1066:1080]' ; 
+
+Input(38).cellname = '060209Bc1' ; % on midget mulitclamp (very very weak light response - but good access)
+Input(38).Alt = '[201:215,236:250]' ;
+
+Input(39).cellname = '060809Ec2' ; % on midget multiclamp good access (good example)
+%Input(39).Alt = '[196:225]' ; %(-50,15)
+Input(39).Alt = '[246:281]' ; %(-50,20)
+Input(39).Steps = {'[164:168]','[149:153]','[159:163]','[154:158]','[169:173]','[174:178]','[179:183]','[184:188]'} ;
+Input(39).StepsPots = '[-70,-60,-50,-40,-10,0,10,15]' ;
+
+Input(40).cellname = '060809Ec1' ; % on midget multiclamp very weak exc not great patch
+Input(40).Alt = '[93:101]' ;
+Input(40).Steps = {'[35:39]','[45:49]','[40:44]'} ;
+Input(40).StepsPots = '[-60,-40,20]' ;
+
+Input(41).cellname = '060809Ec3' ; % on midget (no image) multiclamp not great access
+Input(41).Alt = '[117:131]' ; %(-55,20)
+Input(41).Steps = {'[54:58]','[49:53]','[89:93]','[84:88]','[59:63]','[64:68]','[69:73]','[74:78]','[79:83]','[112:116]'} ;
+Input(41).StepsPots = '[-80,-60,-55,-50,-40,-20,0,10,15,20]' ;
+
+Input(42).cellname = '052609Bc1' ; % may be too big to be midget, access variable but not great
+Input(42).Alt = '[87:101,148:162]' ;
+
+Input(43).cellname = '061609Ec2' ; % midget (freds) multiclamp, 
+Input(43).Alt = '[28:42]' ; %(-55,10) DIFFERNT SEEDS
+
+Input(44).cellname = '061609Ec3' ; % on midget good access(freds) multiclamp, +/- gabazine and stychnine (this cell also has apv steps)
+Input(44).Alt = '[31:45]' ; %(-50,10) DIFFERNT SEEDS
+Input(44).AltNegCorr = '[46:60]' ; %(-40,10) DIFFERNT SEEDS
+%Input(44).Alt = '[61:72]' ; %(-40,10) in INH block DIFFERNT SEEDS
+%Input(44).Alt = '[74:85]' ; %(-40,30) in INH block DIFFERNT SEEDS
+
+Input(45).cellname = '061609Ec4' ; % on midget good access (lost during inh block) (freds) +/- apv and +/- gabazine and strychnine, this cell has steps too, this cell has anticorrelated light driven mean g
+%Input(45).Alt = '[20:34]' ; %(-55,5) control 
+Input(45).Alt = '[55:69]' ; %(-55,5) + APV
+%Input(45).Alt = '[70:81]' ; %(-55,5) + INH block
+Input(45).AltPosCorr = '[82:90]' ; %(-55,25) + INH block
+%Input(45).AltPosCorr = '[91:105]' ; %(-55,45) + INH block
+
+Input(46).cellname = '063009Ec2' ; % on midget multiclamp good access (13-17) + apv whole time
+Input(46).Alt = '[116:130,186:200,216:230]' ; %(-50,20) APV
+Input(46).AltNegCorr = '[146:160]' ; %(-30,20) APV
+%Input(46).AltNegCorr = '[171:185]' ; %(-40,20) APV
+Input(46).AltPosCorr = '[201:215]' ; %(-60,20) APV
+Input(46).Steps = {'[16:20]','[21:25]','[26:30]','[31:35]','[36:40]','[41:45]'} ;
+Input(46).StepsPots = '[-80,-60,-40,-20,0,20]' ;
+Input(46).StepsAPV = {'[76:80]','[81:85]','[86:90]','[71:75]','[91:95]','[106:110]','[101:105]','[96:100]'} ;
+Input(46).StepsAPVPots = '[-80,-60,-40,-20,0,10,15,20]' ;
+
+Input(47).cellname = '063009Ec3' ; % on midget multiclamp good access (13-18) but not as good during apv
+Input(47).Alt = '[86:115]' ; %(-50,20) control
+%Input(47).Alt = '[157:171]' ; %(-50,20) apv
+
+Input(48).cellname = '063009Ec4' ; % on midget multiclamp good access (12-15) +/- apv and +/- sychnine and gabazine
+Input(48).Alt = '[80:94]' ; %(-50,20) control
+Input(48).AltNegCorr = '[99:113]' ; %(-40,20)
+%Input(48).Alt = '[159:173,189:203,219:227]' ; %(-50,20) +APV
+Input(48).AltNegCorr = '[174:188]' ; %(-40,20) +APV
+Input(48).AltPosCorr = '[204:218]' ; %(-60,20) +APV
+%Input(48).Alt = '[276:290]' ; %(-50,20) + INH block
+
+Input(49).cellname = '070709Ec1' ; % on midget multiclamp good access +/- strychnine and gabazine
+%Input(49).Alt = '[134:145]' ; %(-60,20)
+%Input(49).Alt = '[147:161]' ; %(-50,20)
+Input(49).Alt = '[264:278]' ; %(-50,20) +INH block
+%Input(49).AltPosCorr = '[295:309]' ; %(-50,35) +INH block
+Input(49).AltPosCorr = '[317:331]' ; %(-50,45) +INH block 
+
+Input(50).cellname = '070709Ec2' ; % on midget multiclamp good access +/- strychnine and gabazine
+Input(50).Alt = '[70:78,81:86]' ; %(-50,20)
+%Input(50).Alt = '[149:157]' ; %(-50,20) +INH block
+Input(50).AltPosCorr = '[159:173]' ; %(-50,40) + INH block
+
+Input(51).cellname = '072809Ec1' ; % midget (off?) dynamic clamp access not good and no drug block
+Input(51).dcSimShuffle = '[5:20]' ; 
+
+Input(52).cellname = '080609Bc1' ; % on-off ds cell low mean light but good access and light response
+Input(52).AltDS = '[88:102]' ; % no mean bar around 4000 p*/mcone (-50,10)
+Input(52).AltDS = '[103:132]' ; % mean around 800 P*/mcone (-50,10)
+Input(52).AltDS = '[133:162]' ; % mean around 800 (-50,20)
+
+
+
+
+% Parameters assuming sample rate at 10 kHz
+Parameters.PrePnts = 10000 ;    % number of points before stimuli starts
+Parameters.StmPnts = 60000 ;    % number of points during stimuli
+Parameters.PostPnts = 1000 ;    % number of points after stimuli ends
+Parameters.STAPnts = 3000 ;     % number of points used for prespike wave forms
+Parameters.DecimatePnts = 10 ;  % number of points averaged together in order to downsample prespike waveforms
+Parameters.SmoothPnts = 100 ;   % number of points used to smooth spike train to make PSTH
+Parameters.QuietPnts = 200 ;    % number of points of no spikes that identifiies a burst
+Parameters.MinSpikeNumber = 2 ; % minimum number of spikes defining a burst
+Parameters.isicut = 20 ;        % time to cut isi in half
+Parameters.DClight = 1 ;        % 1=1st set of g, 2=2nd set of g
+Parameters.ChopPnts = 6000 ;    % number of points used to find lin filter
+
+Parameters.Einh = -80 ;         % inh reversal potential (mV)
+Parameters.Eexc = 0 ;           % exc reversal potential (mV)
+Parameters.Eleak = -70 ;        % leak g reversal potential (mV)
+Parameters.cap = 0.04 ;         % cell capacitance (nF)
+Parameters.Vrest = -70 ;        % initial voltage of cell (mV)      
+Parameters.Vthresh = -45 ;       % spike threshold (mV)
+Parameters.AbsRef = 0.002 ;     % absolute refractory period (sec) 
+Parameters.RelRefTau = 0.008 ;  % relative refractory decay tau (sec)
+Parameters.RelRefAmp = 4 ;      % amplitude of relative ref period (mV)
+Parameters.Gleak = 1 ;          % amplitude of leak conductance (nS)
+
+%in seconds
+Parameters.IVtimes = [] ;    % points you want an IV plot
+
+% prep matrix if it doesn't exist already
+if ~exist('ForIgor')
+    ForIgor=struct() ;
+end
+
+%% assess recoding quality (Cell attached only) 
+if perform.CellCheckCA == 1 ;
+    id = 'CA' ;
+    Temp = CellCheck(Input,Parameters,id,A) ;
+    ForIgor = mergeStruct(ForIgor,Temp) ;
+end
+
+%% assess CA burst data
+if perform.BStatCA == 1 ;
+    id = 'CA' ;
+    Temp = BStat(Input,Parameters,id,A) ;
+    ForIgor = mergeStruct(ForIgor,Temp) ;
+end
+    
+%% perfrom isi dis analysis
+if perform.ISIdisCA == 1 ;
+    id = 'CA' ;
+    Temp = ISIdisAnalysis(Input,Parameters,id,A) ;
+    ForIgor = mergeStruct(ForIgor,Temp) ;
+end
+
+%% perform linear nonlinear model from light to spikes
+if perform.LNfiltersCA == 1 ;
+    id = 'CA'
+    Temp = LNfilters(Input,Parameters,id,A) ;
+    ForIgor = mergeStruct(ForIgor,Temp) ;
+end
+
+%% perfrom variance assessment
+if perform.VarGcheckExc == 1 ;
+    id = 'Exc' ;
+    Temp = GNoisevariance(Input,Parameters,id,A) ;
+    ForIgor = mergeStruct(ForIgor,Temp) ;
+end
+    
+if perform.VarGcheckInh == 1 ;
+    id = 'Inh' ;
+    Temp = GNoisevariance(Input,Parameters,id,A) ;
+    ForIgor = mergeStruct(ForIgor,Temp) ;
+end
+
+%% perform AltV analysis
+if perform.AltVanalysis == 1 ;
+    id = 'Alt' ;
+    Temp = ValtAnalyzer(Input,Parameters,id,A) ;
+    ForIgor = mergeStruct(ForIgor,Temp) ;
+end
+
+if perform.AltVanalysisNegCorr == 1 ;
+    id = 'AltNegCorr' ;
+    Temp = ValtAnalyzer(Input,Parameters,id,A) ;
+    ForIgor = mergeStruct(ForIgor,Temp) ;
+end
+
+if perform.AltVanalysisPosCorr == 1 ;
+    id = 'AltPosCorr' ;
+    Temp = ValtAnalyzer(Input,Parameters,id,A) ;
+    ForIgor = mergeStruct(ForIgor,Temp) ;
+end
+
+%% perform IV plot
+
+if perform.IVSteps == 1 ;
+    id = 'Steps' ;
+    Temp = IVsteps(Input,Parameters,id, A) ;
+    ForIgor = mergeStruct(ForIgor,Temp) ;
+end
+
+if perform.IVStepsAPV == 1 ;
+    id = 'StepsAPV' ;
+    Temp = IVsteps(Input,Parameters,id, A) ;
+    ForIgor = mergeStruct(ForIgor,Temp) ;
+end 
+
+%% perform integrate voltage model (LIF without the Gleak or Spikes) 
+
+if perform.LIFforSimG == 1
+    id = 'Alt' ;
+    Temp = LIFforSimG(Input,Parameters,id, A) ;
+    ForIgor = mergeStruct(ForIgor,Temp) ;
+end 
+
+end % Cell (A) loop
+
+%% Get data
+[fp, error] = ITCInitializeAnalysis(500000, ['~/Data/Primate/',Input(A).cellname]);
+
+%% Prespike stimulus (STA) from cell attached recording
+if perform.STACA == 1 ;
+
+epochs = str2num(Input(A).CA) ;
+for a = 1:length(epochs) ; % for each spike epoch
+    [stm(a,:), error] = ITCReadEpochStm(epochs(a), 0, fp);  % get the light stimulus
+    [data(a,:), error] = ITCReadEpoch(epochs(a), 0, fp);    % get cell attached data
+end
+
+data = data - repmat(mean(data(:,1:Parameters.PrePnts),2),1,size(data,2)) ; % subtract mean of prepoints 
+
+% rectifier and zero stim
+negstmPnts = find(stm<0) ;  % find indicies which would be getting a negative stim voltage
+stm(negstmPnts) = 0 ;       % make these points zero
+stm = stm - repmat(mean(stm(:,Parameters.PrePnts:Parameters.PrePnts+Parameters.StmPnts),2),1,size(stm,2)) ; % subtract off mean of stimulus during time varying stimulus
+
+% detect spikes in cell attached data
+SpikePnts = SpikeDetection(data,10,10000) ; % data,threshold,samplerate
+
+% get STA
+% find spikes that can be used for STA
+for a = 1:length(SpikePnts) ;                                                               % for each spike epoch ...
+    STA_spikes{a} = find(SpikePnts{a}>Parameters.PrePnts+Parameters.STAPnts & SpikePnts{a}<Parameters.PrePnts+Parameters.StmPnts) ;    % indicies of SpikePnts vector during the stimuli and far enough out to get the prespike wave form 
+    NumSpikes(a) = length(STA_spikes{a}) ;                                                  % number of spikes to be used per trial for STA
+end % end epoch loop
+
+SumSpikes = [0,cumsum(NumSpikes)] ;
+
+% create a matrix of NaNs for all the pre spike wave forms
+PreSpike_stm = nans(SumSpikes(end),floor(Parameters.STAPnts/Parameters.DecimatePnts)) ; % the STA will be decimated, thus the decimate
+
+for a = 1:length(SpikePnts) ;                                                               % for each spike epoch ...
+    for b = 1:length(STA_spikes{a}) ; % for each spike that can be used to note a prespike waveform...   
+        PreSpike_stm(SumSpikes(a)+b,:) = DecimateWave(stm(a,SpikePnts{a}(STA_spikes{a}(b))-Parameters.STAPnts+1:SpikePnts{a}(STA_spikes{a}(b))),Parameters.DecimatePnts) ;                   
+    end % spike loop    
+end % end epoch loop
+
+% get average pre spike waveforms over all epochs   
+STA = mean(PreSpike_stm) ;
+STA = STA/max(abs(STA)) ;    % normalize to maximum 
+
+% prep structure Igor export
+identifier = ['STACA',num2str(A)] ;
+ForIgor.(identifier) = STA ;
+
+figure
+plot(STA)
+title(identifier)
+
+clearvars -except A Input Parameters  perform fp ForIgor 
+end
+
+%% Linear Filter from light stimuli to Gexc
+if perform.LinFExc == 1 ;
+    id = 'Exc' ;
+    Temp = light2gFilters(Input,Parameters,id,A) ;
+    ForIgor = mergeStruct(ForIgor,Temp) ;
+end % end linear filter loop
+
+if perform.LinFInh == 1 ;
+    id = 'Inh' ;
+    Temp = light2gFilters(Input,Parameters,id,A) ;
+    ForIgor = mergeStruct(ForIgor,Temp) ;
+end % end linear filter loop
+
+if perform.LinFInhApb == 1 ;
+    id = 'InhApb' ;
+    Temp = light2gFilters(Input,Parameters,id,A) ;
+    ForIgor = mergeStruct(ForIgor,Temp) ;
+end % end linear filter loop
+
+
+%% esimate prespike exc and inh synaptic currents from Vclamp and Iclamp data
+
+if perform.STIIC == 1 ;
+
+% get iclamp example cell data
+[fp, error] = ITCInitializeAnalysis(500000, ['~/Data/Primate/',Input(11).cellname]);
+
+epochsIC = str2num(Input(11).IC) ; % control inh data
+for a = 1:length(epochsIC) ; % for each spike epoch
+    [stmIC(a,:), error] = ITCReadEpochStm(epochsIC(a), 0, fp);  % get the light stimulus
+    [seedIC(a),error]= ITCGetSeed(epochsIC(a),0,0, fp) ; % seed used 
+    [dataIC(a,:), error] = ITCReadEpoch(epochsIC(a), 0, fp);    % get cell attached data
+    [SIIC(a), error] = ITCGetSamplingInterval(epochsIC(a), fp);
+    SRIC(a) = 1/(SIIC(a) * 1e-6); % Sampling rate in Hz
+end
+dataIC = dataIC - 10 ; % correct for liquid junction potential
+stmIC = stmIC - repmat(mean(stmIC,2),1,size(stmIC,2)) ; % subtract off mean of stimulus 
+stmIC = stmIC./repmat(max(stmIC,[],2),1,size(stmIC,2)) ; % normalize each stimulus 
+
+% get vclamp cell exc data
+[fp, error] = ITCInitializeAnalysis(500000, ['~/Data/Primate/',Input(A).cellname]);
+
+epochsExc = str2num(Input(A).Exc) ; % control inh data
+for a = 1:length(epochsExc) ; % for each spike epoch
+    [stmExc(a,:), error] = ITCReadEpochStm(epochsExc(a), 0, fp);  % get the light stimulus
+    [seedExc(a),error]= ITCGetSeed(epochsExc(a),0,0, fp) ; % seed used 
+    [dataExc(a,:), error] = ITCReadEpoch(epochsExc(a), 0, fp);    % get cell attached data
+    [SIExc(a), error] = ITCGetSamplingInterval(epochsExc(a), fp);
+    SRExc(a) = 1/(SIExc(a) * 1e-6); % Sampling rate in Hz
+end
+dataExc = dataExc - repmat(mean(dataExc(:,1:Parameters.PrePnts),2),1,size(dataExc,2)) ; % subtract mean of prepoints 
+stmExc = stmExc - repmat(mean(stmExc,2),1,size(stmExc,2)) ; % subtract off mean of stimulus 
+stmExc = stmExc./repmat(max(stmExc,[],2),1,size(stmExc,2)) ; % normalize each stimulus 
+
+% get vclamp cell inh data
+epochsInh = str2num(Input(A).Inh) ; % control inh data
+for a = 1:length(epochsInh) ; % for each spike epoch
+    [stmInh(a,:), error] = ITCReadEpochStm(epochsInh(a), 0, fp);  % get the light stimulus
+    [seedInh(a),error]= ITCGetSeed(epochsInh(a),0,0, fp) ; % seed used 
+    [dataInh(a,:), error] = ITCReadEpoch(epochsInh(a), 0, fp);    % get cell attached data
+    [SIInh(a), error] = ITCGetSamplingInterval(epochsInh(a), fp);
+    SRInh(a) = 1/(SIInh(a) * 1e-6); % Sampling rate in Hz
+end
+dataInh = dataInh - repmat(mean(dataInh(:,1:Parameters.PrePnts),2),1,size(dataInh,2)) ; % subtract mean of prepoints 
+stmInh = stmInh - repmat(mean(stmInh,2),1,size(stmInh,2)) ; % subtract off mean of stimulus 
+stmInh = stmInh./repmat(max(stmInh,[],2),1,size(stmInh,2)) ; % normalize each stimulus 
+
+% find unique light seed stimuli used to record current clamped cell
+uSet = unique(seedIC) ;
+
+for a = 1:length(uSet) ; % for each unique stimuli used
+    IndIC{a} = find(seedIC==uSet(a)) ; % identify the rows where the this stim was used in the iclamp data
+    IndExc{a} = find(seedExc==uSet(a)) ; % "" in exc data
+    IndInh{a} = find(seedInh==uSet(a)) ; % "" in inh data
+    numTrials(a) = min([length(IndIC{a}),length(IndExc{a}),length(IndInh{a})]) ; % the minimum number of repeated trials in exc,inh, or iclamp
+end
+
+% assumed reversal potentials
+Rexc = 0 ; 
+Rinh = -80 ;
+
+% prep matrix
+V = nans(sum(numTrials),length(dataIC));
+Iexc = V;
+Iinh = V;
+Gexc = V;
+Ginh = V;
+round = 0 ;
+
+% estimate exc synaptic currents from synaptic conductances and icalmp data
+for a = 1:length(uSet) ; % for each unique stimuli
+    for b=1:numTrials(a) ; % for each trial of this unique stim
+        round = round+1 ;
+        V(round,:) = dataIC(IndIC{a}(b),:) ; % get iclamp data 
+        Gexc(round,:) = dataExc(IndExc{a}(b),:)/(Rinh-Rexc) ; % conductances from currents recorded
+        Ginh(round,:) = dataInh(IndInh{a}(b),:)/(Rexc-Rinh) ; % conductances from currents recorded
+        Iexc(round,:) = Gexc(round,:).*(V(round,:)-Rexc) ; % calculate Iexc and put into matrix
+        Iinh(round,:) = Ginh(round,:).*(V(round,:)-Rinh) ;
+        Cinh(round,:) = abs(Iinh(round,:))./(abs(Iexc(round,:))+abs(Iinh(round,:))) ; % calculate fraction of inh contribution to total synaptic current
+    end
+    startpnt = max(cumsum(numTrials(1:a)))-numTrials(a)+1 ;
+    endpnt = max(cumsum(numTrials(1:a))) ;
+    VMean(a,:)=mean(V(startpnt:endpnt,:)) ;
+    GexcMean(a,:)=mean(Gexc(startpnt:endpnt,:)) ;
+    GinhMean(a,:)=mean(Ginh(startpnt:endpnt,:)) ;
+    IexcMean(a,:)=Gexc(a,:).*(VMean(a,:)-Rexc) ;
+    IinhMean(a,:)=Ginh(a,:).*(VMean(a,:)-Rinh) ;
+end
+
+% get spike data from I clamp data
+SpikePnts = SpikeDetection_WC(V,-20,10000) ; % data,threshold,samplerate
+
+% get STI and STV
+% find spikes that can be used for STA
+for a = 1:length(SpikePnts) ;                                                               % for each spike epoch ...
+    STA_spikes{a} = find(SpikePnts{a}>Parameters.PrePnts+Parameters.STAPnts & SpikePnts{a}<Parameters.PrePnts+Parameters.StmPnts) ;    % indicies of SpikePnts vector during the stimuli and far enough out to get the prespike wave form 
+    NumSpikes(a) = length(STA_spikes{a}) ;                                                  % number of spikes to be used per trial for STA
+end % end epoch loop
+
+SumSpikes = [0,cumsum(NumSpikes)] ;
+
+% create a matrix of NaNs for all the pre spike wave forms
+PreSpike_V = nans(SumSpikes(end),floor(Parameters.STAPnts/Parameters.DecimatePnts)) ; % the STA will be decimated, thus the decimate
+PreSpike_Iexc = nans(SumSpikes(end),floor(Parameters.STAPnts/Parameters.DecimatePnts)) ;
+PreSpike_Iinh = nans(SumSpikes(end),floor(Parameters.STAPnts/Parameters.DecimatePnts)) ;
+PreSpike_Cinh = nans(SumSpikes(end),floor(Parameters.STAPnts/Parameters.DecimatePnts)) ;
+
+for a = 1:length(SpikePnts) ;                                                               % for each spike epoch ...
+    for b = 1:length(STA_spikes{a}) ; % for each spike that can be used to note a prespike waveform...   
+        PreSpike_V(SumSpikes(a)+b,:) = DecimateWave(V(a,SpikePnts{a}(STA_spikes{a}(b))-Parameters.STAPnts+1:SpikePnts{a}(STA_spikes{a}(b))),Parameters.DecimatePnts) ;   
+        PreSpike_Iexc(SumSpikes(a)+b,:) = DecimateWave(Iexc(a,SpikePnts{a}(STA_spikes{a}(b))-Parameters.STAPnts+1:SpikePnts{a}(STA_spikes{a}(b))),Parameters.DecimatePnts) ;
+        PreSpike_Iinh(SumSpikes(a)+b,:) = DecimateWave(Iinh(a,SpikePnts{a}(STA_spikes{a}(b))-Parameters.STAPnts+1:SpikePnts{a}(STA_spikes{a}(b))),Parameters.DecimatePnts) ;
+        PreSpike_Cinh(SumSpikes(a)+b,:) = DecimateWave(Cinh(a,SpikePnts{a}(STA_spikes{a}(b))-Parameters.STAPnts+1:SpikePnts{a}(STA_spikes{a}(b))),Parameters.DecimatePnts) ;
+    end % spike loop    
+end % end epoch loop
+
+% Iexc and Iinh distributions time approaches spike time
+[hist1exc,bin1exc]=hist(PreSpike_Iexc(:,50),100) ;
+[hist2exc,bin2exc]=hist(PreSpike_Iexc(:,200),100) ;
+[hist3exc,bin3exc]=hist(PreSpike_Iexc(:,280),100) ;
+[hist4exc,bin4exc]=hist(PreSpike_Iexc(:,290),100) ;
+
+[hist1inh,bin1inh]=hist(PreSpike_Iinh(:,50),100) ;
+[hist2inh,bin2inh]=hist(PreSpike_Iinh(:,200),100) ;
+[hist3inh,bin3inh]=hist(PreSpike_Iinh(:,280),100) ;
+[hist4inh,bin4inh]=hist(PreSpike_Iinh(:,290),100) ;
+
+
+% get average pre spike waveforms over all epochs   
+STV = mean(PreSpike_V) ;
+STIexc = mean(PreSpike_Iexc) ;
+STIinh = mean(PreSpike_Iinh) ;
+STCinh = mean(PreSpike_Cinh) ;
+STCinh2 = abs(STIinh)./(abs(STIinh)+abs(STIexc)) ;
+
+% prep structure Igor export
+identifier = ['STV',num2str(A)] ;
+ForIgor.(identifier) = STV ;
+
+figure
+plot(STV)
+title(identifier)
+
+identifier = ['STIexc',num2str(A)] ;
+ForIgor.(identifier) = STIexc ;
+
+figure
+plot(STIexc)
+title(identifier)
+
+identifier = ['STIinh',num2str(A)] ;
+ForIgor.(identifier) = STIinh ;
+
+figure
+plot(STIinh)
+title(identifier)
+
+identifier = ['STCinh',num2str(A)] ;
+ForIgor.(identifier) = STCinh ;
+
+figure
+plot(STCinh)
+title(identifier)
+
+identifier = ['STCinh2',num2str(A)] ;
+ForIgor.(identifier) = STCinh2 ;
+
+figure
+plot(STCinh2)
+title(identifier)
+
+clearvars -except A Input Parameters  perform fp ForIgor 
+end
+
+
+%%
+% power spectrum of exc and inh
+if perform.PSg == 1 ;
+
+epochs = str2num(Input(A).Exc) ;
+for a = 1:length(epochs) ; % for each spike epoch
+    [stm(a,:), error] = ITCReadEpochStm(epochs(a), 0, fp);  % get the light stimulus
+    [dataexc(a,:), error] = ITCReadEpoch(epochs(a), 0, fp);    % get cell attached data
+    [SI(a), error] = ITCGetSamplingInterval(epochs(a), fp);
+    SR(a) = 1/(SI(a) * 1e-6); % Sampling rate in Hz
+end
+
+[powerspec_xvaluesEXC, mean_powerspecEXC] = PowerSpectrumFinder(dataexc,SR(1)) ;
+[powerspec_xvaluesLight, mean_powerspecLight] = PowerSpectrumFinder(stm,SR(1)) ;
+
+epochs = str2num(Input(A).Inh) ;
+for a = 1:length(epochs) ; % for each spike epoch
+    [stm(a,:), error] = ITCReadEpochStm(epochs(a), 0, fp);  % get the light stimulus
+    [datainh(a,:), error] = ITCReadEpoch(epochs(a), 0, fp);    % get cell attached data
+    [SI(a), error] = ITCGetSamplingInterval(epochs(a), fp);
+    SR(a) = 1/(SI(a) * 1e-6); % Sampling rate in Hz
+end
+
+[powerspec_xvaluesINH, mean_powerspecINH] = PowerSpectrumFinder(datainh,SR(1)) ;
+
+identifier = ['PSXexc',num2str(A)] ;
+ForIgor.(identifier) = powerspec_xvaluesEXC ;
+
+identifier = ['PSexc',num2str(A)] ;
+ForIgor.(identifier) = mean_powerspecEXC ;
+
+figure
+plot(powerspec_xvaluesEXC, mean_powerspecEXC(1:length(powerspec_xvaluesEXC)),'g')
+hold on
+H = gca ; %get current axis handle
+set(H,'Xscale','log') ;
+set(H,'Yscale','log') ;
+title(identifier)
+
+identifier = ['PSXinh',num2str(A)] ;
+ForIgor.(identifier) = powerspec_xvaluesINH ;
+
+identifier = ['PSinh',num2str(A)] ;
+ForIgor.(identifier) = mean_powerspecINH ;
+
+identifier = ['PSXlight',num2str(A)] ;
+ForIgor.(identifier) = powerspec_xvaluesLight ;
+
+identifier = ['PSlight',num2str(A)] ;
+ForIgor.(identifier) = mean_powerspecLight ;
+
+gcf
+plot(powerspec_xvaluesINH, mean_powerspecINH(1:length(powerspec_xvaluesEXC)),'r')
+plot(powerspec_xvaluesLight, mean_powerspecLight(1:length(powerspec_xvaluesLight)),'k')
+
+end
+%% Auttocorr inh
+if perform.ACInh == 1 ;
+
+epochs = str2num(Input(A).Inh) ;
+for a = 1:length(epochs) ; % for each spike epoch
+    [stm(a,:), error] = ITCReadEpochStm(epochs(a), 0, fp);  % get the light stimulus
+    [data(a,:), error] = ITCReadEpoch(epochs(a), 0, fp);    % get cell attached data
+    [SI(a), error] = ITCGetSamplingInterval(epochs(a), fp);
+    SR(a) = 1/(SI(a) * 1e-6); % Sampling rate in Hz
+    ac(a,:) = xcov(data(a,:)) ; % auttocorrelation
+end
+
+acMean = mean(ac) ;
+
+acXvalues = ([1:length(ac)]-(length(ac)+1)/2)*1000/SR(1) ;
+
+figure
+plot(acXvalues,acMean)
+
+end
+
+%% cross correlation of G On inh with Gexc
+if perform.CCexcOninh == 1 ; % OFF channel inh isolated via APB
+
+epochsCon = str2num(Input(A).Inh) ; % control inh data
+for a = 1:length(epochsCon) ; % for each spike epoch
+    [Constm(a,:), error] = ITCReadEpochStm(epochsCon(a), 0, fp);  % get the light stimulus
+    [Condata(a,:), error] = ITCReadEpoch(epochsCon(a), 0, fp);    % get cell attached data
+    [ConSI(a), error] = ITCGetSamplingInterval(epochsCon(a), fp);
+    ConSR(a) = 1/(ConSI(a) * 1e-6); % Sampling rate in Hz
+end
+Condata = Condata - repmat(mean(Condata(:,1:Parameters.PrePnts),2),1,size(Condata,2)) ; % subtract mean of prepoints 
+
+epochsOff = str2num(Input(A).InhApb) ; % +apb inh data
+for a = 1:length(epochsOff) ; % for each spike epoch
+    [Offstm(a,:), error] = ITCReadEpochStm(epochsOff(a), 0, fp);  % get the light stimulus
+    [Offdata(a,:), error] = ITCReadEpoch(epochsOff(a), 0, fp);    % get cell attached data
+    [OffSI(a), error] = ITCGetSamplingInterval(epochsOff(a), fp);
+    OffSR(a) = 1/(OffSI(a) * 1e-6); % Sampling rate in Hz
+end
+Offdata = Offdata - repmat(mean(Offdata(:,1:Parameters.PrePnts),2),1,size(Offdata,2)) ; % subtract mean of prepoints 
+
+overlap = min(size(Offdata,1),size(Condata,1)) ; % number of traces
+
+if ~isequal(Constm(1:overlap,:),Offstm(1:overlap,:)) ; % if all the stim used are in the correct order 
+    disp('data out of order?')
+end
+
+Inhdata = Condata(1:overlap,:) - Offdata(1:overlap,:) ; % subtract off inh from total inh to find estimates of on inh 
+Inhdata = Inhdata/61.6 ; % on inh conductance
+
+epochsExc = str2num(Input(A).Exc) ; % control inh data
+for a = 1:length(epochsCon) ; % for each spike epoch
+    [Excstm(a,:), error] = ITCReadEpochStm(epochsExc(a), 0, fp);  % get the light stimulus
+    [Excdata(a,:), error] = ITCReadEpoch(epochsExc(a), 0, fp);    % get cell attached data
+    [ExcSI(a), error] = ITCGetSamplingInterval(epochsExc(a), fp);
+    ExcSR(a) = 1/(ExcSI(a) * 1e-6); % Sampling rate in Hz
+end
+Excdata = Excdata - repmat(mean(Excdata(:,1:Parameters.PrePnts),2),1,size(Excdata,2)) ; % subtract mean of prepoints 
+Excdata = Excdata/-61.6 ;
+
+% get cross correlation of G
+for a = 1:min(size(Inhdata,1),size(Excdata,1)) ; % for each matching epoch ...
+    cc(a,:) = xcov(Excdata(a,Parameters.PrePnts+1:Parameters.PrePnts+Parameters.StmPnts),Inhdata(a,Parameters.PrePnts+1:Parameters.PrePnts+Parameters.StmPnts),'coef') ;
+end
+ccmean = mean(cc) ;
+
+ccXvalues = [1:length(ccmean)] - (length(ccmean)+1)/2 ;
+
+figure
+plot(ccXvalues,ccmean)
+
+end
+%end % Cell (A) loop
+

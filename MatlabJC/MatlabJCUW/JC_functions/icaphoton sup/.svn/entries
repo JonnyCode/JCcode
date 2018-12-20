@@ -1,0 +1,52 @@
+8
+
+dir
+50
+https://rieke-server.physiol.washington.edu/svn/matlab-analysis/trunk/users/jon/icaphoton%20sup
+https://rieke-server.physiol.washington.edu/svn/matlab-analysis
+
+
+
+2009-01-29T19:26:55.351396Z
+50
+jon
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+ec1fb8b4-1bd7-44a3-b676-8918235e6431
+
+MakeNotesFile.m
+file
+287
+
+
+
+2009-03-23T17:09:59.000000Z
+a139b3596f5991515d74d63b376c3240
+2009-07-16T20:34:09.914934Z
+287
+jon
+
+EpochExcluder.m
+file
+
+
+
+
+2009-01-29T19:28:52.000000Z
+e6a049ec5e559813730586ddf3dbce45
+2009-01-29T19:26:55.351396Z
+50
+jon
+

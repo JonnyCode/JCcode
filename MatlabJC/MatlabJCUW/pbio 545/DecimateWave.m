@@ -1,0 +1,1 @@
+function NewWave = DecimateWave(OldWave, StepSize)% Brute force decimation of data in vector.NumPts = floor(length(OldWave) / StepSize);data(1:NumPts) = 0;for i=1:NumPts	for j=1:StepSize		data(i) = data(i) + OldWave((i-1)*StepSize + j);	endenddata = data ./ StepSize;NewWave = data;

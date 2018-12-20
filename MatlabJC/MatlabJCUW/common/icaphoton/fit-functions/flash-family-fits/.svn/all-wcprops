@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/flash-family-fits
+END
+FitFamilyCycle.m
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/flash-family-fits/FitFamilyCycle.m
+END
+PlotAndFitFamily.m
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/flash-family-fits/PlotAndFitFamily.m
+END
+PlotAndFitFamilyHill.m
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/fit-functions/flash-family-fits/PlotAndFitFamilyHill.m
+END

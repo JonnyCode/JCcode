@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/matlab-analysis/!svn/ver/342/trunk/common/analysis-filter-view/view
+END
+alternateNodeAppearance.m
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/matlab-analysis/!svn/ver/270/trunk/common/analysis-filter-view/view/alternateNodeAppearance.m
+END
+dummyView.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/matlab-analysis/!svn/ver/342/trunk/common/analysis-filter-view/view/dummyView.m
+END
+ampView.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/matlab-analysis/!svn/ver/342/trunk/common/analysis-filter-view/view/ampView.m
+END
+ViewPanelWrapper.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/matlab-analysis/!svn/ver/178/trunk/common/analysis-filter-view/view/ViewPanelWrapper.m
+END
+singleEpoch.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/matlab-analysis/!svn/ver/342/trunk/common/analysis-filter-view/view/singleEpoch.m
+END

@@ -1,0 +1,81 @@
+% Simulate a goal programming network
+% Adaptive learning rate strategy has been used (cfr SuperSAB)
+%
+% Usage: [V,F,E,U,M,conv_flag] = gpn_ada (D, B, G, ep, dt, U_init, m_init)
+%
+%		V	Final Network State
+%		F	Constraint Satisfaction (F outputs)
+%		E	sum(abs(F))
+%		D,B	Constraint arrays
+%		G	Gain Vector [nc x 1]
+%		M	Learning rate trace
+
+function [V,F,E,U,M,conv_flag] = gpn (D, B, G, ep, dt, U_init, m_init)
+
+if (nargin<2)
+	ep = 1000;
+	dt = .001;
+end
+
+[nc ns] = size(D);	% # states, # constraints
+conv_flag = 0;
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%
+	% Array Initialisations %
+	%%%%%%%%%%%%%%%%%%%%%%%%%
+U = zeros (ep,ns);
+if (exist('U_init'))
+	U(1,:) = U_init;
+end
+E = zeros (ep-1, 1);
+PF = zeros (ep-1,nc);
+M = zeros (ep-1,1);
+
+	%%%%%%%%%%%%%
+	% Here Goes %
+	%%%%%%%%%%%%%
+m = m_init;
+e = 2;
+	% Compute Network States g(u_i)
+	V = U(e-1,:);
+
+	% Output F amps
+	F = G.*(sum(D.*(ones(nc,1)*V),2)-B);
+	E(e-1) = sum(abs(F));
+
+	% Update Network States
+	aux2 = -sum(D.*(F*ones(1,ns)),1);
+	U(e,:) = U(e-1,:) + (m*dt).*(aux2);
+
+	PF(e-1,:) = F';
+	M(e-1) = m;
+
+for e=3:ep
+	% Compute Network States g(u_i)
+	V = U(e-1,:);
+
+	% Output F amps
+	F = G.*(sum(D.*(ones(nc,1)*V),2)-B);
+	E(e-1) = sum(abs(F));
+
+	% Adaptive Learning Rate
+	if (E(e-1)==0)
+		conv_flag = 1;
+		break;
+	end
+	if (E(e-2)/E(e-1)>.9999)
+		m = m*1.05;
+
+		% Update Network States
+		aux2 = -sum(D.*(F*ones(1,ns)),1);
+		U(e,:) = U(e-1,:) + (m*dt).*(aux2);
+	else
+		m = m/2;
+		U(e,:) = U(e-2,:);
+	end
+
+	PF(e-1,:) = F';
+	M(e-1) = m;
+end
+
+

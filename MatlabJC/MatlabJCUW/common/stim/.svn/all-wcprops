@@ -1,0 +1,275 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/matlab-analysis/!svn/ver/551/trunk/common/stim
+END
+addSpatialPhaseNoise.m
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/matlab-analysis/!svn/ver/432/trunk/common/stim/addSpatialPhaseNoise.m
+END
+getIntensityDistribution.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/matlab-analysis/!svn/ver/440/trunk/common/stim/getIntensityDistribution.m
+END
+hdf5load.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/matlab-analysis/!svn/ver/271/trunk/common/stim/hdf5load.m
+END
+cellArraysToMatricesInStruct.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/matlab-analysis/!svn/ver/499/trunk/common/stim/cellArraysToMatricesInStruct.m
+END
+MovingBarStimulus.m
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/matlab-analysis/!svn/ver/840/trunk/common/stim/MovingBarStimulus.m
+END
+StripsAdaptationStimulus.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/matlab-analysis/!svn/ver/435/trunk/common/stim/StripsAdaptationStimulus.m
+END
+gamma_table_B_mac.mat
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/matlab-analysis/!svn/ver/829/trunk/common/stim/gamma_table_B_mac.mat
+END
+makeUniformDist.m
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/matlab-analysis/!svn/ver/545/trunk/common/stim/makeUniformDist.m
+END
+PairedSpotStimulus2.m
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/matlab-analysis/!svn/ver/354/trunk/common/stim/PairedSpotStimulus2.m
+END
+setIntensityDistribution.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/matlab-analysis/!svn/ver/432/trunk/common/stim/setIntensityDistribution.m
+END
+gammaCorrect.m
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/matlab-analysis/!svn/ver/546/trunk/common/stim/gammaCorrect.m
+END
+hdf5save.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/matlab-analysis/!svn/ver/271/trunk/common/stim/hdf5save.m
+END
+gamma_table_B_obsolete_1_28_11.mat
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/matlab-analysis/!svn/ver/724/trunk/common/stim/gamma_table_B_obsolete_1_28_11.mat
+END
+TextureStimulus.m
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/matlab-analysis/!svn/ver/545/trunk/common/stim/TextureStimulus.m
+END
+BumpAnalysis.m
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/matlab-analysis/!svn/ver/529/trunk/common/stim/BumpAnalysis.m
+END
+IntensityResponseAnalysis.m
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/matlab-analysis/!svn/ver/354/trunk/common/stim/IntensityResponseAnalysis.m
+END
+SpatialStimSuper.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/matlab-analysis/!svn/ver/354/trunk/common/stim/SpatialStimSuper.m
+END
+TestPattern.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/matlab-analysis/!svn/ver/357/trunk/common/stim/TestPattern.m
+END
+hdf5append.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/matlab-analysis/!svn/ver/271/trunk/common/stim/hdf5append.m
+END
+hdf5load_recursion.m
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/matlab-analysis/!svn/ver/271/trunk/common/stim/hdf5load_recursion.m
+END
+gamma_table_F_obsolete_022011.mat
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/matlab-analysis/!svn/ver/724/trunk/common/stim/gamma_table_F_obsolete_022011.mat
+END
+waitForFileExist.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/matlab-analysis/!svn/ver/354/trunk/common/stim/waitForFileExist.m
+END
+MovingBarAnalysis.m
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/matlab-analysis/!svn/ver/551/trunk/common/stim/MovingBarAnalysis.m
+END
+generateTexture2.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/matlab-analysis/!svn/ver/578/trunk/common/stim/generateTexture2.m
+END
+SingleSpotStimulus.m
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/matlab-analysis/!svn/ver/309/trunk/common/stim/SingleSpotStimulus.m
+END
+SplitGradingStimulus.m
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/matlab-analysis/!svn/ver/538/trunk/common/stim/SplitGradingStimulus.m
+END
+GammaMeasurementStimulus.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/matlab-analysis/!svn/ver/328/trunk/common/stim/GammaMeasurementStimulus.m
+END
+hdf5save_recursion.m
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/matlab-analysis/!svn/ver/271/trunk/common/stim/hdf5save_recursion.m
+END
+gammatableOldSlice.mat
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/matlab-analysis/!svn/ver/390/trunk/common/stim/gammatableOldSlice.mat
+END
+movingBar_executableString.txt
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/matlab-analysis/!svn/ver/369/trunk/common/stim/movingBar_executableString.txt
+END
+SpatialGradingStimulus.m
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/matlab-analysis/!svn/ver/548/trunk/common/stim/SpatialGradingStimulus.m
+END
+PairedSpotsAnalysis.m
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/matlab-analysis/!svn/ver/354/trunk/common/stim/PairedSpotsAnalysis.m
+END
+AnalysisSuper.m
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/matlab-analysis/!svn/ver/529/trunk/common/stim/AnalysisSuper.m
+END
+SpatialStimulus.m
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/matlab-analysis/!svn/ver/533/trunk/common/stim/SpatialStimulus.m
+END
+SplitFieldStimulus.m
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/matlab-analysis/!svn/ver/539/trunk/common/stim/SplitFieldStimulus.m
+END
+addSpatialAmplitudeNoise.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/matlab-analysis/!svn/ver/432/trunk/common/stim/addSpatialAmplitudeNoise.m
+END
+generateTexture.m
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/matlab-analysis/!svn/ver/545/trunk/common/stim/generateTexture.m
+END
+ScanTextureStimulus.m
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/matlab-analysis/!svn/ver/577/trunk/common/stim/ScanTextureStimulus.m
+END
+StimulusStabilityAnalysis.m
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/matlab-analysis/!svn/ver/318/trunk/common/stim/StimulusStabilityAnalysis.m
+END
+gamma_table.mat
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/matlab-analysis/!svn/ver/267/trunk/common/stim/gamma_table.mat
+END
+gamma_table_B.mat
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/matlab-analysis/!svn/ver/829/trunk/common/stim/gamma_table_B.mat
+END
+PairedSpotStimulus.m
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/matlab-analysis/!svn/ver/293/trunk/common/stim/PairedSpotStimulus.m
+END
+ContrastReversingGratings.m
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/matlab-analysis/!svn/ver/525/trunk/common/stim/ContrastReversingGratings.m
+END
+CheckerboardStimulus.m
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/matlab-analysis/!svn/ver/288/trunk/common/stim/CheckerboardStimulus.m
+END
+gamma_table_F.mat
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/matlab-analysis/!svn/ver/724/trunk/common/stim/gamma_table_F.mat
+END

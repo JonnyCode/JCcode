@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/matlab-analysis/!svn/ver/1/trunk/common/fit-functions/comb-fits
+END
+SampleFromCombDistribution.m
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/matlab-analysis/!svn/ver/1/trunk/common/fit-functions/comb-fits/SampleFromCombDistribution.m
+END
+FitYokedCombDistSingles.m
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/matlab-analysis/!svn/ver/1/trunk/common/fit-functions/comb-fits/FitYokedCombDistSingles.m
+END
+yoked_comb_fit.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/matlab-analysis/!svn/ver/1/trunk/common/fit-functions/comb-fits/yoked_comb_fit.m
+END
+FitYokedCombDistribution.m
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/matlab-analysis/!svn/ver/1/trunk/common/fit-functions/comb-fits/FitYokedCombDistribution.m
+END
+yoked_comb_fit2.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/matlab-analysis/!svn/ver/1/trunk/common/fit-functions/comb-fits/yoked_comb_fit2.m
+END
+FitYokedCombDistribution.n
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/matlab-analysis/!svn/ver/1/trunk/common/fit-functions/comb-fits/FitYokedCombDistribution.n
+END
+yoked_comb_fit3.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/matlab-analysis/!svn/ver/1/trunk/common/fit-functions/comb-fits/yoked_comb_fit3.m
+END
+CombProbability.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/matlab-analysis/!svn/ver/1/trunk/common/fit-functions/comb-fits/CombProbability.m
+END
+FitYokedCombDistribution2.m
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/matlab-analysis/!svn/ver/1/trunk/common/fit-functions/comb-fits/FitYokedCombDistribution2.m
+END

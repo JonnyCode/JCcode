@@ -1,0 +1,76 @@
+function ForIgor = KoBwAnalyzer(DataBlock, DB, Params)
+
+% this function will analyze binary white stimuli response from array data
+% before and after cells are knocked out (KO)
+
+% JC 11/11/14
+
+% load data
+PreKo = load_data(DataBlock(DB).PreKo.DataPath) ;
+PreKo = load_neurons(PreKo) ;
+
+PostKo = load_data(DataBlock(DB).PostKo.DataPath) ;
+PostKo = load_neurons(PostKo) ;
+
+% how different are the preko and postko response fits
+% spatial rf?
+marks_params.thresh = 3 ;
+PreKo = load_sta(PreKo) ;
+PreKo = load_params(PreKo) ;
+PreKo = get_sta_summaries(PreKo, 'all','marks_params', marks_params) ;
+PreKo = get_sta_fits_from_vision(PreKo) ;
+
+PostKo = load_sta(PostKo) ;
+PostKo = load_params(PostKo) ;
+PostKo = get_sta_summaries(PostKo, 'all','marks_params', marks_params) ;
+PostKo = get_sta_fits_from_vision(PostKo) ;
+
+for a = 1:length(PreKo.cell_types) ;
+    PreKo_celltypes{a} = PreKo.cell_types{a}.name ;
+end
+
+for a = 1:length(PostKo.cell_types) ;
+    PostKo_celltypes{a} = PostKo.cell_types{a}.name ;
+end
+
+UniqueCellTypes = unique([PreKo_celltypes,PostKo_celltypes]) ;
+if isempty(UniqueCellTypes{1}) ;
+    UniqueCellTypes = UniqueCellTypes(2:end) ;
+end
+for a = 1:length(UniqueCellTypes) ;
+    figure(a) 
+    subplot(1,2,1)
+    if sum(strcmp(UniqueCellTypes{a},PreKo_celltypes))>0 ;
+        plot_rf_summaries(PreKo, UniqueCellTypes{a}, 'plot_fits', true, 'foa',gcf,'fit_color','k') ; % plot mosiac
+    end
+    hold on
+    if sum(strcmp(UniqueCellTypes{a},PostKo_celltypes))>0 ;
+        plot_rf_summaries(PostKo, UniqueCellTypes{a}, 'plot_fits', true, 'foa',gcf,'fit_color', 'r') ; % plot mosiac
+    end
+    title(UniqueCellTypes{a})
+end
+
+% temporal rf?
+for a = 1:length(UniqueCellTypes) ;
+    figure(a) 
+    subplot(1,2,2)
+    if sum(strcmp(UniqueCellTypes{a},PreKo_celltypes))>0 ;
+        plot_time_courses_JC(PreKo, UniqueCellTypes{a}, 'all', true, 'bw', true, 'figure',gcf,'plot_color','k') ; % plot bw time courses
+    end
+    hold on
+    if sum(strcmp(UniqueCellTypes{a},PostKo_celltypes))>0 ;
+        plot_time_courses_JC(PostKo, UniqueCellTypes{a}, 'all', true,'bw', true, 'figure',gcf,'plot_color','r') ; % plot bw time courses
+    end
+    title(UniqueCellTypes{a})
+end
+
+% how stable are the response fits for a single conditions?
+% spatial rf?
+
+% temporal rf?
+
+
+% how well are the models at predicting the response?
+
+
+

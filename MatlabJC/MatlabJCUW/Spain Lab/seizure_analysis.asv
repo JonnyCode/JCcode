@@ -1,0 +1,114 @@
+function [mean_isi_data,spk_rastor4_zero_data]=seizure_analysis(file,marker);
+
+% this function will filter seizure traces and detect appropriate spikes
+% J. Cafaro 6/17/07
+
+% set parameters
+  file = 'i070612lData1' ; % set file to analyze
+samplerate = 20000 ;%Hz
+lowpass = 0 ;%Hz         % lowpass filter
+highpass = 100 ;%Hz      % highpass filter
+sweeptime = .2 ;%sec     % time of sweep 
+
+% opening data trace
+type = 'float32' ;
+out=readIgor(file,type) ;  % calls function to read igor files into matlab
+
+% time points
+m = length(out)/samplerate ; % m = seconds worth of data
+t = 0:1/samplerate:m-1/samplerate ; %1st collected point, t=0
+maxfreq = samplerate/2 ;     % the maximum frequency recorded is half of the sample rate
+
+% filter data trace
+filterout = fft(out);                % filterout is redundant with low frequencies at both the begining and end of the vector
+filterout(lowpass*m+1:highpass*m) = 0 ;  % get rid of first set of frequenc points     
+filterout(length(out)-highpass*m+1:length(out)-lowpass*m) = 0;  % get rid of second set
+outhp = ifft(filterout);     % inverse fft
+
+% sweep parameters
+sweep_points = samplerate*sweeptime ;      % number of points per sweep
+number_sweeps = length(out)/sweep_points ; % number of sweeps
+
+% spike detection
+[spk_times,peak_points] = spk_finder(outhp); % calls function to detect spikes
+
+% spike rastors
+spk_rastor = NaNs(1,length(out)) ; % makes a zeros matrix
+spk_rastor(peak_points) = 1 ;      % puts in spike points 
+spk_rastor2 = reshape(spk_rastor,sweep_points,number_sweeps)' ;     % cut into sweeps
+spk_rastor3 = spk_rastor2 ;
+spk_rastor3(:,1:250) = NaN ; % get rid of stim artifact in sweeps 
+spk_rastor4 = reshape(spk_rastor3',1,length(out)); % no stim artifact in one trace
+
+i = find(spk_rastor4==1) ;                      % changes spk_rastor NaNs into zeros
+spk_rastor4_zero_data=zeros(1,length(spk_rastor4)) ;
+spk_rastor4_zero_data(i)=1 ;
+
+% calculate spike times without stim artifact
+spk_times2_index = find(spk_rastor3' == 1) ;   % find the spike points 
+spk_times2 = spk_times2_index *.05 ;  % make them spike times
+
+% calculate interspike interval within bursts
+isi_temp = diff(spk_times2) ; % this will include times between spikes in different bursts
+isi_index = find(isi_temp<40) ; % find only those within a burst
+isi = isi_temp(isi_index) ; % isi from spikes within same burst
+mean_isi_data = mean(isi) ;
+
+%________________________________________________________________________
+% plot traces
+figure(1), plot(t,out) 
+figure(2),plot(t,outhp)
+%________________________________________________________________________
+
+%________________________________________________________________________
+% plot spike rastor2
+for a = 1:50       % for each sweep...
+    figure(3)
+    plot(t(1:sweep_points),spk_rastor3(a,:)*a,marker,'MarkerSize',2)   %plot the spike times
+    hold on
+end
+%________________________________________________________________________
+
+% %________________________________________________________________________
+% % check spike detection accuracy 
+% for b = 1:number_sweeps         % for each sweep...
+% figure, plot(t(1:sweep_points),out(b*sweep_points+1-sweep_points:b*sweep_points)) % plot the unfiltered trace
+% hold on, plot(t(1:sweep_points),spk_rastor3(b,:)*b,'r*')   %plot the spike times
+% end
+% %________________________________________________________________________
+
+%%_________________________________________________________________________
+% % create cross correlation of recorded pair for each sweep
+% i = find(spk_rastor3==1) ;                      % changes spk_rastor NaNs into zeros
+% spk_rastor3_zero=zeros(size(spk_rastor3)) ;
+% spk_rastor3_zero(i)=1 ;
+% 
+% for c = 1:number_sweeps ;           % runs a cross cor on each sweep pair
+% cc(c,:) = xcov(spk_rastor3_zero_data1(c,:),spk_rastor3_zero_data2(c,:),'coef') ;
+% end
+% cc=mean(cc) ;                       % takes the average of the cc pairs
+% 
+% decimate = 10 ; % average wave by ten 
+% NewWave = DecimateWave(cc,decimate) ; % average wave
+% 
+% lags = 1:length(NewWave) ;                  % creates x-axis for lags
+% lags = lags - (length(NewWave)+1)/2 ;
+% lags =  lags*(1/samplerate)*1000*decimate ; %make lags in ms
+% 
+% plot(lags,NewWave)
+% 
+% [cc_peak, cc_peakpoint] = max(NewWave) ;    % find peak of cc
+% cc_lag = lags(cc_peakpoint) ;               % find lag of cc
+%%_________________________________________________________________________
+
+% %_________________________________________________________________________
+% % spike distance metric
+% cost = .05 ;                                % set cost of spike distance metric (shift if <40ms)                                
+% d = spkd(spk_times2_data1,spk_times2_data2,cost) ;    % runs spike distance function at a given cost
+% spk_num_diff = abs(length(spk_times2_data1)-length(spk_times2_data2)) ; % difference in number of spikes
+% d_shift = d - spk_num_diff ;  % subtract the difference in the number of spikes to obtain the cost from shifing only
+% d_norm = d_shift/min(length(spk_times2_data1),length(spk_times2_data2)) ;    % obtain cost per spike  
+% shift = d_norm / cost ; %obtain shift per spike in ms
+% %_________________________________________________________________________
+
+

@@ -1,0 +1,16 @@
+function [sumPSTHvar,psth] = PsthVar(spikeTrain,gaussianStd,samplerate) 
+
+% gaussianStd (sec), samplerate (hz),
+
+time = [1/samplerate:1/samplerate:(1/samplerate)*length(spikeTrain)] ; 
+
+for a=1:length(gaussianStd) ; % for each new psth window gaussian
+    gaussian = exp(-((time-(time(end)/2)).^2)/(2*gaussianStd(a)^2)) ; % gaussian function exp(-((t-u)^2/2s^2)) from wikipedia "gauassian functions"
+    
+    for b = 1:size(spikeTrain,1) ; % for each set of spike trains
+        temp = ifft(fft(spikeTrain(b,:)).*fft(gaussian)) ; % convolution spike train and gaussian
+        psth{a}(b,:) = circshift(temp,[0,floor(length(temp)/2)+1])*samplerate/sum(gaussian) ;
+    end
+    
+    sumPSTHvar(a) = sum(var(psth{a})) ;
+end

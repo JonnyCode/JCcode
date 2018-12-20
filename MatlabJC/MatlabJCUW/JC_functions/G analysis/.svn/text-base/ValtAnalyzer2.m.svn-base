@@ -1,0 +1,239 @@
+% this function will analyze alternate voltage exp
+
+% PARAMETERS
+CellInfo_str = '020608Bc4_a' ;
+epochs_str = {'[93,99,105,111,117]','[95,101,107,113,119]','[97,103,109,115,121]'} ;
+epochCond_num = [3,3,3,1,1,1,1] ;
+alternating_epochs = 1 ;    % index of epochs_str for alternating voltages
+hold1_epochs = 2 ;            % "                     " hold 1
+hold2_epochs = 3 ;            % "                     " hold 2
+
+Hold1 = -60;   % holding potential of first hold (EXC HOLD)
+Hold2 = 0;   % holding potential of second hold (INH HOLD)
+
+cyclepnts = 100 ; % number of sample points in a cycle, pnts between leaving hold1 and returning (Also gets rid of first cycle)    
+FirstAltPnt = 40; % first sample point you want to plot after begining of step from alternation 
+LastAltPnt = 45;  % last "                                                                    "
+
+PostPnt = 5000; % points collected beyond which data is not worth analyzing
+
+Eexc = 0 ; % exc reversal potential
+Einh = -60 ;
+
+samplerate = 10000 ; % Hz at which data was collected
+
+
+% FORMATING
+% Get appropriate cell structure format
+cd ~/data_analysis/Index ;
+load (CellInfo_str) ;
+
+CellInfo = LoadSCIData(CellInfo,1) ;  % for two amps used
+
+EpochCondition = LoadAndSmoothEpochCondition(CellInfo,5000,1) ; 
+
+
+% CURRENT 
+for a=1:length(epochs_str) % for each set of epochs
+clear epoch_Idata % clear previous epoch data 
+    
+epochs{a} = str2num(epochs_str{a}) ; % change string to number
+
+for b=1:length(epochs{a}) ; % for each epoch in that set
+epoch_Idata(b)= find(EpochCondition(epochCond_num(a)).EpochNumbers == epochs{a}(b)) ; % find the index of those epochs
+end % b loop
+clear b
+
+Iindvids{a} = EpochCondition(epochCond_num(a)).EpochData.Data(epoch_Idata,cyclepnts:end-PostPnt) ; % find the individual current traces
+Imean(a,:) = mean(EpochCondition(epochCond_num(a)).EpochData.Data(epoch_Idata,cyclepnts:end-PostPnt)) ; %find the mean of each epoch set
+
+
+end % a loop
+clear a
+
+Iindvids_H1 = Iindvids{hold1_epochs} ;
+Iindvids_H2 = Iindvids{hold2_epochs} ;
+
+Imean_H1 = Imean(hold1_epochs,:) ;
+Imean_H2 = Imean(hold2_epochs,:) ;
+
+% WINDOWING ALTERNATING V DATA
+IindvidsAlt_H1 = NaN(size(Iindvids{alternating_epochs})) ; % make a vector of NaNs that will serve as base for ploting alternating coductances at hold1
+IindvidsAlt_H2 = NaN(size(Iindvids{alternating_epochs})) ; % make a vector of NaNs that will serve as base for ploting alternating coductances at hold2_
+
+ImeanAlt_H1 = NaNs(1,length(Imean(alternating_epochs,:))) ; % make a vector of NaNs that will serve as base for ploting alternating coductances at hold1
+ImeanAlt_H2 = NaNs(1,length(Imean(alternating_epochs,:))) ; % make a vector of NaNs that will serve as base for ploting alternating coductances at hold2
+
+for b = FirstAltPnt:LastAltPnt ;        % for each data point per cycle we want to plot
+IindvidsAlt_H2(:,[b:cyclepnts:end]) = Iindvids{alternating_epochs}(:,[b:cyclepnts:end]) ; 
+IindvidsAlt_H1(:,[b+cyclepnts/2:cyclepnts:end]) = Iindvids{alternating_epochs}(:,[b+cyclepnts/2:cyclepnts:end]) ; 
+    
+ImeanAlt_H2(1,[b:cyclepnts:end]) = Imean(alternating_epochs,[b:cyclepnts:end]) ;                        % take the point you want from the first half of each cylce
+ImeanAlt_H1(1,[b+cyclepnts/2:cyclepnts:end]) = Imean(alternating_epochs,[b+cyclepnts/2:cyclepnts:end]) ;  % take the point you want from the second half of each cycle
+end % b loop
+clear b
+
+% residuals of alternating currents
+IindvidsAltResid_H2 = IindvidsAlt_H2 - repmat(ImeanAlt_H2,size(IindvidsAlt_H2,1),1) ; % residual of alternating hold 2
+IindvidsAltResid_H1 = IindvidsAlt_H1 - repmat(ImeanAlt_H1,size(IindvidsAlt_H1,1),1) ; % residual of alternating hold 2
+
+% CONDUCTANCES
+% find offset for each exc and inhibitory trace to assume isolation
+ImeanOffset_AltH1 = max(ImeanAlt_H1) ;  
+ImeanOffset_AltH2 = min(ImeanAlt_H2) ;
+ImeanOffset_H1 = max(Imean_H1) ; 
+ImeanOffset_H2 = min(Imean_H2) ; 
+
+% adjust current data by their offsets  
+ImeanAltH1_adjusted = ImeanAlt_H1 - ImeanOffset_AltH1 ;
+ImeanAltH2_adjusted = ImeanAlt_H2 - ImeanOffset_AltH2 ;
+ImeanH1_adjusted = Imean_H1 - ImeanOffset_H1 ;
+ImeanH2_adjusted = Imean_H2 - ImeanOffset_H2 ;
+
+% divide adjusted currents by driving force to get conductance
+GAlt_H1 = ImeanAltH1_adjusted./(Einh-Eexc) ;
+GAlt_H2 = ImeanAltH2_adjusted./(Eexc-Einh) ;
+G_H1 = ImeanH1_adjusted./(Einh-Eexc) ;
+G_H2 = ImeanH2_adjusted./(Eexc-Einh) ;
+
+% interpolate signals 
+c = find(isnan(GAlt_H1) == 0) ;     % find all the indices that are not nans
+GAltH1_intplt = interp1(c,GAlt_H1(c),[1:length(GAlt_H1)],'linear','extrap') ; % interpolate to find values that were not sampled
+clear c
+
+d = find(isnan(GAlt_H2) == 0) ;     % find all the indices that are not nans
+GAltH2_intplt = interp1(d,GAlt_H2(d),[1:length(GAlt_H2)],'linear','extrap') ; % interpolate to find values that were not sampled
+clear d
+
+for a = 1:size(IindvidsAltResid_H1,1) % for each individual trace of resduals from the alternating conductances
+c = find(isnan(IindvidsAltResid_H1(a,:)) == 0) ;     % find all the indices that are not nans
+IindvidsAltResid_H1intplt(a,:) = interp1(c,IindvidsAltResid_H1(a,c),[1:length(IindvidsAltResid_H1)],'linear','extrap') ; % interpolate to find values that were not sampled
+d = find(isnan(IindvidsAltResid_H2(a,:)) == 0) ;
+IindvidsAltResid_H2intplt(a,:) = interp1(d,IindvidsAltResid_H2(a,d),[1:length(IindvidsAltResid_H2)],'linear','extrap') ;
+clear c d
+end % a loop
+
+% low pass filter all signals
+Freqstep = samplerate/length(G_H1) ; % samplerate in hz
+freqcutoff = round((cyclepnts-(LastAltPnt-FirstAltPnt))/Freqstep) ; % cycle points- (last-first) because this is the greatest time between two points sampled
+
+Gtrace_fft = fft([GAltH1_intplt;GAltH2_intplt;G_H1;G_H2],[],2) ; % take fft of all signals
+Gtrace_fft(:,1+freqcutoff:length(Gtrace_fft)-freqcutoff) = 0 ; % cut out high frequencies in first and second half of fft
+Gtrace_filtered = real(ifft(Gtrace_fft,[],2)); % inverse fft
+
+% CROSS CORRELATE CURRENT SIGNALs
+[Corr_ResH1AltvResH2Alt,pvalue_ResH1AltvResH2Alt] = SpearmanCoef(IindvidsAltResid_H2,IindvidsAltResid_H1) ; % correlation of the residuals from currents recroding simultaneously
+
+[Corr_H1AltvH1,pvalue_H1AltvH1] = SpearmanCoef(ImeanAlt_H1,Imean_H1) ; % correlation of the mean recorded via alt conductance and mean recorded at one holding potential
+
+[Correlation_H1vH1,pvalue_H1vH1] = SpearmanCoef(Iindvids_H1,repmat(Imean_H1,size(Iindvids_H1,1),1)) ; % correlation of individual currents recorded at one potential with mean
+
+[Correlation_H2AltvH2,pvalue_H2AltvH2] = SpearmanCoef(ImeanAlt_H2,Imean_H2) ;
+
+meanCorr_AltH1vH2 = mean(Correlation_H1vH2) ; 
+
+
+% FIGURES
+figure
+subplot(2,1,1) 
+plot(G_H1)
+hold on
+plot(GAltH1_intplt,'g')
+plot(GAlt_H1,'r')
+xlabel('sample points')
+ylabel('mean conductance (nS)')
+title({CellInfo_str, 'mean hold 1 (exc)'})
+
+
+subplot(2,1,2)
+plot(G_H2)
+hold on
+plot(GAltH2_intplt,'g')
+plot(GAlt_H2,'r')
+xlabel('sample points')
+ylabel('mean conductance (nS)')
+title({CellInfo_str, 'mean hold 2 (inh)'})
+text('units','normalized') %this sets the text in units where (1,1) is upper right
+text(.1, .9,['cycle points = ' num2str(cyclepnts)],'units','normalized')
+text(.1,.85,['first cycle point = ' num2str(FirstAltPnt)],'units','normalized')
+text(.1,.80,['first cycle point = ' num2str(LastAltPnt)],'units','normalized')
+
+
+figure
+subplot(3,1,1)
+plot(Imean(alternating_epochs,:))
+hold on
+plot(ImeanAlt_H1,'r')
+plot(ImeanAlt_H2,'g')
+xlabel('sample points')
+ylabel('mean current (pA)')
+title({CellInfo_str,epochs_str{alternating_epochs},'Alternating current seperation'})
+legend('mean alternating','seperated hold1', 'separated hold2')
+
+subplot(3,1,2)
+plot(Imean(hold1_epochs,:))
+xlabel('sample points')
+ylabel('mean current (pA)')
+title({CellInfo_str,epochs_str{hold1_epochs},'mean hold 1'})
+
+subplot(3,1,3)
+plot(Imean(hold2_epochs,:))
+xlabel('sample points')
+ylabel('mean current (pA)')
+title({CellInfo_str,epochs_str{hold2_epochs},'mean hold 2'})
+
+figure
+subplot(2,1,1)
+plot(Gtrace_filtered(3,:))
+hold on
+plot(Gtrace_filtered(1,:),'r')
+xlabel('samplepoints')
+ylabel('mean conductance (nS)')
+title({CellInfo_str,'filtered traces'})
+legend('single hold','alternating hold')
+
+subplot(2,1,2)
+plot(Gtrace_filtered(4,:))
+hold on
+plot(Gtrace_filtered(2,:),'r')
+xlabel('samplepoints')
+ylabel('mean conductance (nS)')
+title({CellInfo_str,'filtered traces'})
+legend('single hold','alternating hold')
+
+
+figure
+for a = 1: size(IindvidsAltResid_H1,1)
+subplot(size(IindvidsAltResid_H1,1),1,a)
+plot(IindvidsAltResid_H1(a,:))
+hold on
+plot(IindvidsAltResid_H2(a,:),'r')
+xlabel('sample points')
+ylabel('Residual')
+
+end % a loop
+clear a
+
+
+figure
+plot([1:length(Corr_ResH1AltvResH2Alt)]-((length(Corr_ResH1AltvResH2Alt)+1)/2) ,mean(Corr_ResH1AltvResH2Alt))
+xlabel ('sample points')
+ylabel ('mean cross correlation coefficient (Spearman Rank)')
+title('Resdl H1 Alt vs Resdl H2 Alt')
+
+figure
+for a = 1:size(Corr_ResH1AltvResH2Alt,1) ;
+subplot(ceil(size(Corr_ResH1AltvResH2Alt,1)+1)/2,2,a)
+plot(([1:length(Corr_ResH1AltvResH2Alt)]-((length(Corr_ResH1AltvResH2Alt)+1)/2)),Corr_ResH1AltvResH2Alt(a,:)) 
+xlabel ('sample points')
+ylabel ('cross correlation coefficient (Spearman Rank)')
+title('Resdl H1 Alt vs Resdl H2 Alt')
+end % a loop
+subplot(ceil(size(Corr_ResH1AltvResH2Alt,1)+1)/2,2,a+1)
+plot([1:length(Corr_ResH1AltvResH2Alt)]-((length(Corr_ResH1AltvResH2Alt)+1)/2) ,mean(Corr_ResH1AltvResH2Alt))
+xlabel ('sample points')
+ylabel ('mean cross correlation coefficient (Spearman Rank)')
+title('Resdl H1 Alt vs Resdl H2 Alt')
+clear a
+
+

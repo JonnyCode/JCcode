@@ -1,0 +1,107 @@
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/signal%20processing/two-alternative
+END
+FindDiscriminant.m
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/signal%20processing/two-alternative/FindDiscriminant.m
+END
+FindDiscrimForSingles.m
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/signal%20processing/two-alternative/FindDiscrimForSingles.m
+END
+AddThermals.m
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/signal%20processing/two-alternative/AddThermals.m
+END
+CalcRespProjsandHistsSing.m
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/signal%20processing/two-alternative/CalcRespProjsandHistsSing.m
+END
+SubtractResponses.m
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/signal%20processing/two-alternative/SubtractResponses.m
+END
+CalcRespProjsandHists2.m
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/signal%20processing/two-alternative/CalcRespProjsandHists2.m
+END
+Do2AFCDiscrimination.m
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/signal%20processing/two-alternative/Do2AFCDiscrimination.m
+END
+CalculateResponseStats.m
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/signal%20processing/two-alternative/CalculateResponseStats.m
+END
+CalcRespProjsandHists3.m
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/signal%20processing/two-alternative/CalcRespProjsandHists3.m
+END
+ShuffleEpochs.m
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/signal%20processing/two-alternative/ShuffleEpochs.m
+END
+2AFCSingles.m
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/signal%20processing/two-alternative/2AFCSingles.m
+END
+Do2AFCFromCombFitsRF.m
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/signal%20processing/two-alternative/Do2AFCFromCombFitsRF.m
+END
+SplitCondition.m
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/signal%20processing/two-alternative/SplitCondition.m
+END
+Calculate2AFCRespProjection2.m
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/signal%20processing/two-alternative/Calculate2AFCRespProjection2.m
+END
+Calculate2AFCRespProjection3.m
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/signal%20processing/two-alternative/Calculate2AFCRespProjection3.m
+END
+FindDiscriminant2.m
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/signal%20processing/two-alternative/FindDiscriminant2.m
+END
+Calc2AFCRespProjSingles.m
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/signal%20processing/two-alternative/Calc2AFCRespProjSingles.m
+END

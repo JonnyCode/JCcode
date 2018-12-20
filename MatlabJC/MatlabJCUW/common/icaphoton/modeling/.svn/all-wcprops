@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/modeling
+END
+SimulateRodResponse.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/modeling/SimulateRodResponse.m
+END
+SimBipFromComb.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/modeling/SimBipFromComb.m
+END
+RhFeedbackPlusMultiStepModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/modeling/RhFeedbackPlusMultiStepModel.m
+END
+SimulateBipolarResponse.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/modeling/SimulateBipolarResponse.m
+END
+NumericalFlashModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/modeling/NumericalFlashModel.m
+END
+RhCascadeModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/modeling/RhCascadeModel.m
+END
+LinearCascadeModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/modeling/LinearCascadeModel.m
+END
+RhFeedbackModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/modeling/RhFeedbackModel.m
+END
+ChannelSatModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/modeling/ChannelSatModel.m
+END
+RhCascadePlusTransSatModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/modeling/RhCascadePlusTransSatModel.m
+END
+TransducinSatModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/modeling/TransducinSatModel.m
+END

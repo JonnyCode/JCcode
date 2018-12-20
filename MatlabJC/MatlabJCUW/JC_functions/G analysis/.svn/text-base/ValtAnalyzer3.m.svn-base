@@ -1,0 +1,85 @@
+% this function will analyze alternate voltage exp
+
+for A = [1,8] ;
+% Cells for analysis
+
+Input(1).cellname = '101907Bc1' ; % good patch, but identity was questioned
+Input(1).AltV = '[140,146,152,158,164]' ; % alternating voltages
+Input(1).HoldExc = '[142,148,154,160,166]' ; % Exc isolation hold
+Input(1).HoldInh = '[144,150,156,162,168]' ; % inh isolation hold
+
+% get data
+[fp, error] = ITCInitializeAnalysis(500000, ['~/Data/mouse/',Input(A).cellname]);
+
+epochs = str2num(Input(A).AltV) ;
+for a = 1:length(epochs) ; % for each spike epoch
+    [dataAltV(a,:), error] = ITCReadEpoch(epochs(a), 0, fp) ;    % get data
+    [SI(a), error] = ITCGetSamplingInterval(epochs(a), fp); % get sampling interval
+    SI(a) = SI(a) * 1e-6; % Sampling interval in sec
+end
+
+epochs = str2num(Input(A).HoldExc) ;
+for a = 1:length(epochs) ; % for each spike epoch
+    [dataExc(a,:), error] = ITCReadEpoch(epochs(a), 0, fp) ;    % get data
+end
+
+epochs = str2num(Input(A).HoldInh) ;
+for a = 1:length(epochs) ; % for each spike epoch
+    [dataInh(a,:), error] = ITCReadEpoch(epochs(a), 0, fp) ;    % get data
+end
+
+cyclepnts = 100 ; % number of sample points in a cycle, pnts between leaving hold1 and returning (Also gets rid of first cycle)    
+FirstAltPnt = 45; % first sample point you want to plot after begining of step from alternation 
+LastAltPnt = 45;  % last "                                                                    "
+
+PostPnt = 5000; % points collected beyond which data is not worth analyzing
+
+samplerate = 10000 ; % Hz at which data was collected
+
+% WINDOWING ALTERNATING V DATA
+Alt_Exc = NaN(size(dataAltV)) ; % make a vector of NaNs that will serve as base for ploting alternating coductances at hold1
+Alt_Inh = NaN(size(dataAltV)) ; % make a vector of NaNs that will serve as base for ploting alternating coductances at hold2_
+
+for a = FirstAltPnt:LastAltPnt ;        % for each data point per cycle we want to plot
+    Alt_Inh(:,[a:cyclepnts:end]) = dataAltV(:,[a:cyclepnts:end]) ; 
+    Alt_Exc(:,[a+cyclepnts/2:cyclepnts:end]) = dataAltV(:,[a+cyclepnts/2:cyclepnts:end]) ; 
+end 
+
+% change currents into G and interplate the alt recordings
+for a = 1:size(dataExc,1) ; % for each trial
+    GExc(a,:) = dataExc(a,:)/-61 - min(dataExc(a,:)/-61) ; % get conductance from stable currrents
+    GInh(a,:) = dataInh(a,:)/61 - min(dataInh(a,:)/61) ; 
+    GAlt_Exc(a,:) = Alt_Exc(a,:)/-61 - min(Alt_Exc(a,:)/-61) ; % get conductance from alt current
+    GAlt_Inh(a,:) = Alt_Inh(a,:)/61 - min(Alt_Inh(a,:)/61) ;
+
+    b = find(isnan(GAlt_Exc(a,:)) == 0) ;     % find all the indices that are not nans
+    GAlt_ExcInt(a,:) = interp1(b,GAlt_Exc(a,b),[1:length(GAlt_Exc)],'linear','extrap') ; % interpolate to find values that were not sampled
+    clear b
+    
+    b = find(isnan(GAlt_Inh(a,:)) == 0) ;     % find all the indices that are not nans
+    GAlt_InhInt(a,:) = interp1(b,GAlt_Inh(a,b),[1:length(GAlt_Inh)],'linear','extrap') ; % interpolate to find values that were not sampled
+    clear b
+
+end
+
+GAlt_ExcIntMean = mean(GAlt_ExcInt) ;
+GAlt_InhIntMean = mean(GAlt_InhInt) ;
+
+GExcMean = mean(GExc) ;
+GInhMean = mean(GInh) ;
+
+GAlt_ExcIntVar = var(GAlt_ExcInt) ;
+GAlt_InhIntVar = var(GAlt_InhInt) ;
+
+GExcVar = var(GExc) ;
+GInhVar = var(GInh) ;
+
+for a= 1:size(GExc,1) ;
+    GResExc = GExcMean - GExc(a,:) ;
+    GResInh = GInhMean - GInh(a,:) ;
+end
+
+[powerspec_xvalues, mean_powerspec] = PowerSpectrumFinder(GResExc,10000) ;
+
+
+

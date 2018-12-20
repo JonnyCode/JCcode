@@ -1,0 +1,1055 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/matlab-analysis/!svn/ver/240/trunk/common/icaphoton/+icaphoton
+END
+barlow.m
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/barlow.m
+END
+hill.m
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/hill.m
+END
+FilterCondition.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/FilterCondition.m
+END
+SatFunction.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/SatFunction.m
+END
+CumulativeGaussInv.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/CumulativeGaussInv.m
+END
+ApplyHiFrequencyCutoff.m
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/ApplyHiFrequencyCutoff.m
+END
+getTreeLeaves.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/getTreeLeaves.m
+END
+SNRSurfaceFit2.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/SNRSurfaceFit2.m
+END
+GetGoodEpochData.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/GetGoodEpochData.m
+END
+graphicalCheckBox.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/graphicalCheckBox.m
+END
+FindIndependentComponents.m
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/FindIndependentComponents.m
+END
+FitFamilyCycle.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/FitFamilyCycle.m
+END
+polynomial_2.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/polynomial_2.m
+END
+AverageAndVariance.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/AverageAndVariance.m
+END
+SimulateRodResponse.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/SimulateRodResponse.m
+END
+SmoothPowerSpectrum.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/SmoothPowerSpectrum.m
+END
+FindSearchPara.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/FindSearchPara.m
+END
+cumulative_gauss_with_mean.m
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/cumulative_gauss_with_mean.m
+END
+invertEpochSelections.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/invertEpochSelections.m
+END
+nomogram.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/nomogram.m
+END
+TOCSignalProcessing.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/TOCSignalProcessing.m
+END
+ApplyNonlinearity.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/ApplyNonlinearity.m
+END
+getEpochTreeSplitString.m
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/getEpochTreeSplitString.m
+END
+LoadAndSmoothEpochCondition.m
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/LoadAndSmoothEpochCondition.m
+END
+CalcPanelWrapper.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/CalcPanelWrapper.m
+END
+graphicalTreeNodeWidget.m
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/graphicalTreeNodeWidget.m
+END
+Truncate.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/Truncate.m
+END
+SplitNoiseIntoEpochs.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/SplitNoiseIntoEpochs.m
+END
+MakeNotesFile.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/MakeNotesFile.m
+END
+PlotSatResponses.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/PlotSatResponses.m
+END
+CalcRespProjsandHists3.m
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/CalcRespProjsandHists3.m
+END
+InterpolateNByFour.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/InterpolateNByFour.m
+END
+lorentz.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/lorentz.m
+END
+RhCascadeModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/RhCascadeModel.m
+END
+poisson_filter.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/poisson_filter.m
+END
+SplitCondition.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/SplitCondition.m
+END
+Calculate2AFCRespProjection2.m
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/Calculate2AFCRespProjection2.m
+END
+ZeroInterceptLine.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/ZeroInterceptLine.m
+END
+PhotoisomerizationRates.m
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/PhotoisomerizationRates.m
+END
+CombineConditions.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/CombineConditions.m
+END
+graphicalTree.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/graphicalTree.m
+END
+ZeroMeanGaussian.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/ZeroMeanGaussian.m
+END
+SimulateBipolarResponse.m
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/SimulateBipolarResponse.m
+END
+ZeroMean.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/ZeroMean.m
+END
+graphicalTreeNode.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/graphicalTreeNode.m
+END
+invertTreeSelections.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/invertTreeSelections.m
+END
+RotateVector.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/RotateVector.m
+END
+RotateMatrix.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/RotateMatrix.m
+END
+files.ls
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/files.ls
+END
+ScanEpochs.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/ScanEpochs.m
+END
+BackgroundIntensity.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/BackgroundIntensity.m
+END
+logarithm.m
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/logarithm.m
+END
+FindDiscrimForSingles.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/FindDiscrimForSingles.m
+END
+PrincipleComponents.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/PrincipleComponents.m
+END
+ORANGE.TXT
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/ORANGE.TXT
+END
+weber_fechner.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/weber_fechner.m
+END
+RotateConditionData.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/RotateConditionData.m
+END
+yoked_comb_fit2.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/yoked_comb_fit2.m
+END
+calibrationERG.txt
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/calibrationERG.txt
+END
+poisson_filter_sine.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/poisson_filter_sine.m
+END
+ZeroBaseLine.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/ZeroBaseLine.m
+END
+lorentzsum.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/lorentzsum.m
+END
+polynomial.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/polynomial.m
+END
+testEpochTreeGUI.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/testEpochTreeGUI.m
+END
+lorentz_three.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/lorentz_three.m
+END
+CommonAnalysisFolder.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/CommonAnalysisFolder.m
+END
+FitYokedCombDistSingles.m
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/FitYokedCombDistSingles.m
+END
+StraightLineFit.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/StraightLineFit.m
+END
+AddNoiseToCondition.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/AddNoiseToCondition.m
+END
+ChannelSatModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/ChannelSatModel.m
+END
+Do2AFCFromCombFitsRF.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/Do2AFCFromCombFitsRF.m
+END
+Calculate2AFCRespProjection3.m
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/Calculate2AFCRespProjection3.m
+END
+IndexFolder.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/IndexFolder.m
+END
+AutoLEDCalibrate.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/AutoLEDCalibrate.m
+END
+normgaussian.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/normgaussian.m
+END
+cumulative_gaussian.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/cumulative_gaussian.m
+END
+ampView.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/ampView.m
+END
+RhFeedbackPlusMultiStepModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/RhFeedbackPlusMultiStepModel.m
+END
+gaussian.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/gaussian.m
+END
+lorentz-single.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/lorentz-single.m
+END
+SNRSurfaceFit.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/SNRSurfaceFit.m
+END
+ProgrammingFolder.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/ProgrammingFolder.m
+END
+rigCLEDSpectra.mat
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/rigCLEDSpectra.mat
+END
+CombProbability.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/CombProbability.m
+END
+FindResponses.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/FindResponses.m
+END
+PlotImageBatch.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/PlotImageBatch.m
+END
+GREEN.TXT
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/GREEN.TXT
+END
+FindDiscriminant.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/FindDiscriminant.m
+END
+CalcRespProjsandHistsSing.m
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/CalcRespProjsandHistsSing.m
+END
+InterpolateNByTwo.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/InterpolateNByTwo.m
+END
+ViewPanelWrapper.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/ViewPanelWrapper.m
+END
+CalculateResponseStats.m
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/CalculateResponseStats.m
+END
+ShuffleEpochs.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/ShuffleEpochs.m
+END
+FilterSingleCondition.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/FilterSingleCondition.m
+END
+yoked_comb_fit3.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/yoked_comb_fit3.m
+END
+dummyFilter.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/dummyFilter.m
+END
+getTreeEpochs.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/getTreeEpochs.m
+END
+familymodel.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/familymodel.m
+END
+DARK.TXT
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/DARK.TXT
+END
+BaselineCorrect.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/BaselineCorrect.m
+END
+factorial.m
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/factorial.m
+END
+LoadAndSmoothFamilyCondition.m
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/LoadAndSmoothFamilyCondition.m
+END
+Calc2AFCRespProjSingles.m
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/Calc2AFCRespProjSingles.m
+END
+ExcludeGlitches.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/ExcludeGlitches.m
+END
+PowerSpectrum.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/PowerSpectrum.m
+END
+AnalysisFolder.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/AnalysisFolder.m
+END
+lorentz2.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/lorentz2.m
+END
+PlotConfocalImageG230.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/PlotConfocalImageG230.m
+END
+epochTreeGUI.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/epochTreeGUI.m
+END
+exponential.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/exponential.m
+END
+ShuffleList.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/ShuffleList.m
+END
+PCorrectFromSNR.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/PCorrectFromSNR.m
+END
+SubtractResponses.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/SubtractResponses.m
+END
+poisson_fit.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/poisson_fit.m
+END
+Contents.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/matlab-analysis/!svn/ver/224/trunk/common/icaphoton/+icaphoton/Contents.m
+END
+EJMonitorSpectra
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/EJMonitorSpectra
+END
+lorentz_single.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/lorentz_single.m
+END
+FitYokedCombDistribution2.m
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/FitYokedCombDistribution2.m
+END
+TransducinSatModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/TransducinSatModel.m
+END
+NumericalFlashModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/NumericalFlashModel.m
+END
+ApplyFrequencyCutoff.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/ApplyFrequencyCutoff.m
+END
+RhCascadePlusTransSatModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/RhCascadePlusTransSatModel.m
+END
+macaque-cone-spectra.mat
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/macaque-cone-spectra.mat
+END
+dummyView.m
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/dummyView.m
+END
+PlotConfocalImageFile.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/PlotConfocalImageFile.m
+END
+PlotConfocalImage.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/PlotConfocalImage.m
+END
+FindEpochPts.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/FindEpochPts.m
+END
+RotateList.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/RotateList.m
+END
+InterpolateCondition.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/InterpolateCondition.m
+END
+satexponential.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/satexponential.m
+END
+dummyAnalysis.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/dummyAnalysis.m
+END
+2AFCSingles.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/2AFCSingles.m
+END
+singleEpoch.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/singleEpoch.m
+END
+testGraphicalCheckBox.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/testGraphicalCheckBox.m
+END
+CheckStability.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/CheckStability.m
+END
+BlueNDF.mat
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/BlueNDF.mat
+END
+DataFolder.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/DataFolder.m
+END
+PlotAndFitFamily.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/PlotAndFitFamily.m
+END
+ExtractFamilyData.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/ExtractFamilyData.m
+END
+FilterPanelWrapper.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/FilterPanelWrapper.m
+END
+DisplayEpochs.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/DisplayEpochs.m
+END
+testEpochTreeGUINoData.m
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/testEpochTreeGUINoData.m
+END
+yoked_comb_fit.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/yoked_comb_fit.m
+END
+PlotAndFitFamilyHill.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/PlotAndFitFamilyHill.m
+END
+EstimateDarkCurrent.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/EstimateDarkCurrent.m
+END
+DecimateCondition.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/DecimateCondition.m
+END
+keywordTool.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/keywordTool.m
+END
+macaque-rod-spectra.mat
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/macaque-rod-spectra.mat
+END
+PrincipleCompProjections.m
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/PrincipleCompProjections.m
+END
+DarkCurrent.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/DarkCurrent.m
+END
+barlowgain.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/barlowgain.m
+END
+independence_filter.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/independence_filter.m
+END
+SNRFromPCorrect.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/SNRFromPCorrect.m
+END
+AddThermals.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/AddThermals.m
+END
+GetEpochData.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/GetEpochData.m
+END
+CalcRespProjsandHists2.m
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/CalcRespProjsandHists2.m
+END
+Do2AFCDiscrimination.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/Do2AFCDiscrimination.m
+END
+TOCCalibration.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/TOCCalibration.m
+END
+RED.TXT
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/RED.TXT
+END
+sinusoid.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/sinusoid.m
+END
+RhFeedbackModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/RhFeedbackModel.m
+END
+LinearCascadeModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/LinearCascadeModel.m
+END
+Do2IFCDiscrimination.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/Do2IFCDiscrimination.m
+END
+BaselineCorrectOvation.m
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/BaselineCorrectOvation.m
+END
+SampleFromCombDistribution.m
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/SampleFromCombDistribution.m
+END
+FindDiscriminant2.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/FindDiscriminant2.m
+END
+SimBipFromComb.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/SimBipFromComb.m
+END
+SaveAllSpectra.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/SaveAllSpectra.m
+END
+calibration.txt
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/calibration.txt
+END
+BLUE.TXT
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/BLUE.TXT
+END
+testGraphicalTree.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/testGraphicalTree.m
+END
+FitYokedCombDistribution.m
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/FitYokedCombDistribution.m
+END
+gaussianplusmean.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/gaussianplusmean.m
+END
+FitYokedCombDistribution.n
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/FitYokedCombDistribution.n
+END
+testGraphicalTreeNode.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/+icaphoton/testGraphicalTreeNode.m
+END

@@ -1,0 +1,81 @@
+
+cellname = '031309Ec1' ;
+epochs = 598 ; 
+fig_num = 1;
+Amp = 0;
+
+
+try
+    [fp, error] = ITCInitializeAnalysis(1000000, ['~/Data/primate/',cellname]);
+catch
+    [fp, error] = ITCInitializeAnalysis(1000000, ['~/Data/mouse/',cellname]);
+end
+
+for a=1:length(epochs)
+    
+    figure(fig_num)
+    [data, error] = ITCReadEpoch(epochs(a), Amp, fp);
+    plot(data)
+    title(num2str(epochs(a)))
+    
+    pause
+end
+
+try
+    SpatialStimParams = hdf5load(['~/Data/mouse/',cellname,'_spatial.h5']) ;
+catch
+    SpatialStimParams = hdf5load(['~/Data/primate/',cellname,'_spatial.h5']) ;
+end
+
+StrucString = ['params_epoch','71'] ;
+SpatialStimParams.(StrucString)
+
+
+%% 
+CellInfo_str = '030508Bc5_a' ;
+epochs_str = {'[]','[]','[]','[]','[]','[]','[]','[]','[]','[]','[]','[]','[]','[]','[]','[]','[]','[]'} ;
+epochCond_num = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] ;
+UseOffset = 0 ; % enter a number one if you want the offsets to be included in the traces
+Color = {'b','r','g','k','y','c','m','b-.','r-.','g-.','k-.','y-.','c-.','m-.','b:','r:','g:','k:'} ;
+fig_num = 1 ;
+
+clear epoch_Idata epochs trace
+% Get appropriate cell structure format
+cd ~/data_analysis/Index ;
+load (CellInfo_str) ;
+
+CellInfo = LoadSCIData(CellInfo,1) ;  % for two amps used
+
+EpochCondition = LoadAndSmoothEpochCondition(CellInfo,5000,1) ; 
+
+for a=1:length(epochs_str) % for each set of epochs
+    
+epochs = str2num(epochs_str{a}) ; % change string to number
+
+for b=1:length(epochs) ; % for each epoch in that set
+epoch_Idata{a}(b)= find(EpochCondition(epochCond_num(a)).EpochNumbers == epochs(b)) ; % find the index of those epochs
+end
+
+trace{a} = mean(EpochCondition(epochCond_num(a)).EpochData.Data(epoch_Idata{a},:),1) ; % the mean of the epochs
+
+if UseOffset == 1 ; %if you have asked to add the current offsets back into the traces then
+figure(fig_num)
+plot(trace{a}+mean(EpochCondition(epochCond_num(a)).EpochData.Offset(epoch_Idata{a})),Color{a}) ; 
+hold on  
+
+else
+figure(fig_num)
+plot(trace{a},Color{a}) ; 
+hold on
+
+end
+end
+
+title(CellInfo_str)
+legend(epochs_str)
+ylabel('current (pA)')
+xlabel('sample points')
+
+
+%%
+

@@ -1,0 +1,41 @@
+8
+
+dir
+378
+https://rieke-server.physiol.washington.edu/svn/matlab-analysis/trunk/common/icaphoton/signal%20processing/general-analysis/AverageAndVarianceTest
+https://rieke-server.physiol.washington.edu/svn/matlab-analysis
+
+
+
+2008-12-15T06:51:34.517864Z
+13
+fred
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+ec1fb8b4-1bd7-44a3-b676-8918235e6431
+
+test.mat
+file
+
+
+
+
+2009-06-30T18:21:45.000000Z
+d65d2c239e141a092a01115825f77cbf
+2008-12-15T06:51:34.517864Z
+13
+fred
+has-props
+

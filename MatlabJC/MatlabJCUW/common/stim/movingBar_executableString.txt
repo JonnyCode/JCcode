@@ -1,0 +1,1 @@
+spatial_stimpts = ceil((floor(2*sqrt(300^2-((BarHeight/2)^2)) + BarWidth - 1) / BarSpeed) + InterBarPts)*numpnts(BarAngle)

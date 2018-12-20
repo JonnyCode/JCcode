@@ -1,0 +1,23 @@
+// !!!:barry:20080124 These should be implemented in a project template
+
+1. For HDCrashReporter
+Define the following key in your info.plist file or its localized counterpart:
+
+<key>HDCrashReporterEmail</key>
+<string>crashreports@physionconsulting.com</string>
+<key>HDCrashReporterCompanyName</key>
+<string>Physion Consulting</string>
+<key>BWAppDelegateNewTicketURL</key>
+<string>http://www.physionconsulting.com/</string>
+<key>BWAppDelegatePrefsNibName</key>
+<string>AppPreferences</string>
+<key>BWAppDelegateSplashNibName</key>
+<string>AppSplash</string>
+<key>BWAppDelegateShowDebugLog</key>
+<true/>
+
+Optional keys:
+<key>BWAppDelegateRedirectLogsURL</key>
+
+2. For frameworks
+Add copy build phase for app and copy the BWKit.framewor to the app bundle's frameworks directory.

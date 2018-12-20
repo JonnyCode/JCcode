@@ -1,0 +1,35 @@
+copy /Users/lab/Public/Local/Programming/Matlab/icaphoton from garfield to 
+somewhere on your matlab path
+
+copy
+Users/lab/Public/Local/Programming/Acquirino\ version\ 6/OSX-mex-files-version7 
+from garfield to somewhere on your matlab path
+
+Edit icaphoton.m (may have to change the permissions first) to point to your 
+data folder.
+
+move PPC converter.  There are two of these, one does a single file at a 
+time, the other will do a list of files in the current directory.  These 
+live in Users/lab/Public/Local/Programming/Acq_osx_convert/.  
+
+
+PPC converter instructions: 
+
+For either of these to work the converter must be in the same directory as
+the file(s) you wish to convert.  For the single file converter, give a
+different name as the output file, or you will overwrite your original
+data file.  Double-click on the application to start it. 
+
+To do multiple files, you must first make a file with a list of the names
+of the files you wish to convert.  The easiest way to do this is by using
+the terminal.  Go to the directory that has the data files in it (cd
+~/Data).  ls > names.file on the command line will make a file called
+names.file that has each filename on a separate line.  If there are files
+in the directory that you do not want to convert, you can open the file up
+with pico (pico names.file), and you can delete any lines you don't want. 
+(^X to exit, will give you the opportunity to save).  Once you have this
+file, just start the application by double-clicking and tell it the name
+of the file.  It will go through the files one by one.  If it runs into a
+file it cannot convert, it will quit mid-list, and you will have to re-do
+the rest of the files. 
+

@@ -1,0 +1,52 @@
+8
+
+dir
+378
+https://rieke-server.physiol.washington.edu/svn/matlab-analysis/trunk/common/signal%20processing
+https://rieke-server.physiol.washington.edu/svn/matlab-analysis
+
+
+
+2009-04-23T18:11:37.439521Z
+185
+fred
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+ec1fb8b4-1bd7-44a3-b676-8918235e6431
+
+two-alternative
+dir
+
+principle-components
+dir
+
+two-interval
+dir
+
+TOCSignalProcessing.m
+file
+
+
+
+
+2009-02-03T17:34:05.000000Z
+60de2c3357bfd2b951941248165ac1fd
+2009-01-09T07:29:44.931645Z
+35
+fred
+
+general-analysis
+dir
+

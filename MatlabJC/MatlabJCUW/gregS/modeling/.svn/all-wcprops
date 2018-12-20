@@ -1,0 +1,155 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/matlab-analysis/!svn/ver/537/trunk/users/Greg/modeling
+END
+setInputLayerGaussianSpatialFilter.m
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/matlab-analysis/!svn/ver/528/trunk/users/Greg/modeling/setInputLayerGaussianSpatialFilter.m
+END
+makeConeSpatialSamplingLayer.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/matlab-analysis/!svn/ver/534/trunk/users/Greg/modeling/makeConeSpatialSamplingLayer.m
+END
+Subunit.m
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/matlab-analysis/!svn/ver/533/trunk/users/Greg/modeling/Subunit.m
+END
+addConeNoise.m
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/matlab-analysis/!svn/ver/537/trunk/users/Greg/modeling/addConeNoise.m
+END
+FFT1DTransform.m
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/matlab-analysis/!svn/ver/533/trunk/users/Greg/modeling/FFT1DTransform.m
+END
+sumAndHill.m
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/matlab-analysis/!svn/ver/533/trunk/users/Greg/modeling/sumAndHill.m
+END
+uniformNLSetter.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/matlab-analysis/!svn/ver/528/trunk/users/Greg/modeling/uniformNLSetter.m
+END
+TwoD2OneDTransform.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/matlab-analysis/!svn/ver/528/trunk/users/Greg/modeling/TwoD2OneDTransform.m
+END
+ModelExperiment.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/matlab-analysis/!svn/ver/537/trunk/users/Greg/modeling/ModelExperiment.m
+END
+sumAndSigmoid.m
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/matlab-analysis/!svn/ver/533/trunk/users/Greg/modeling/sumAndSigmoid.m
+END
+rectify.m
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/matlab-analysis/!svn/ver/528/trunk/users/Greg/modeling/rectify.m
+END
+NullTransform.m
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/matlab-analysis/!svn/ver/528/trunk/users/Greg/modeling/NullTransform.m
+END
+modelScripts.m
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/matlab-analysis/!svn/ver/537/trunk/users/Greg/modeling/modelScripts.m
+END
+applySpatialFilter.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/matlab-analysis/!svn/ver/533/trunk/users/Greg/modeling/applySpatialFilter.m
+END
+makeConeSpatialSamplingModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/matlab-analysis/!svn/ver/534/trunk/users/Greg/modeling/makeConeSpatialSamplingModel.m
+END
+Layer.m
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/matlab-analysis/!svn/ver/533/trunk/users/Greg/modeling/Layer.m
+END
+FFModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/matlab-analysis/!svn/ver/537/trunk/users/Greg/modeling/FFModel.m
+END
+sumOverSpace.m
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/matlab-analysis/!svn/ver/533/trunk/users/Greg/modeling/sumOverSpace.m
+END
+uniformFilterSetter.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/matlab-analysis/!svn/ver/534/trunk/users/Greg/modeling/uniformFilterSetter.m
+END
+setFlashedBarStimulus.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/matlab-analysis/!svn/ver/534/trunk/users/Greg/modeling/setFlashedBarStimulus.m
+END
+sumAndRectify.m
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/matlab-analysis/!svn/ver/528/trunk/users/Greg/modeling/sumAndRectify.m
+END
+makeBipolarSpatialSamplingModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/matlab-analysis/!svn/ver/528/trunk/users/Greg/modeling/makeBipolarSpatialSamplingModel.m
+END
+NullFilter.m
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/matlab-analysis/!svn/ver/528/trunk/users/Greg/modeling/NullFilter.m
+END
+FFT1DSpace1DTimeTransform.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/matlab-analysis/!svn/ver/533/trunk/users/Greg/modeling/FFT1DSpace1DTimeTransform.m
+END
+setTextureStimulus.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/matlab-analysis/!svn/ver/528/trunk/users/Greg/modeling/setTextureStimulus.m
+END

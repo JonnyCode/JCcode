@@ -1,0 +1,143 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/G%20analysis
+END
+Gintegrator.m
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/G%20analysis/Gintegrator.m
+END
+novelSPA.m
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/G%20analysis/novelSPA.m
+END
+correlatedGnoise.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/G%20analysis/correlatedGnoise.m
+END
+Light2gFilters.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/G%20analysis/Light2gFilters.m
+END
+Ganalysis.m
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/matlab-analysis/!svn/ver/312/trunk/users/jon/G%20analysis/Ganalysis.m
+END
+retrieve_G.m
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/G%20analysis/retrieve_G.m
+END
+BasicGAnalysis.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/G%20analysis/BasicGAnalysis.m
+END
+IVsteps.m
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/matlab-analysis/!svn/ver/287/trunk/users/jon/G%20analysis/IVsteps.m
+END
+GNoisevariance.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/G%20analysis/GNoisevariance.m
+END
+ValtAnalyzer2.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/G%20analysis/ValtAnalyzer2.m
+END
+ValtAnalyzer3.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/G%20analysis/ValtAnalyzer3.m
+END
+FamilyGploter2.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/G%20analysis/FamilyGploter2.m
+END
+LIFforSimG.m
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/matlab-analysis/!svn/ver/287/trunk/users/jon/G%20analysis/LIFforSimG.m
+END
+SpearmanCoef.m
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/G%20analysis/SpearmanCoef.m
+END
+GclampAnalysis.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/G%20analysis/GclampAnalysis.m
+END
+stepGanalysis2.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/G%20analysis/stepGanalysis2.m
+END
+Gpca.m
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/G%20analysis/Gpca.m
+END
+correlatedGnoise2.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/G%20analysis/correlatedGnoise2.m
+END
+ValtAnalyzer.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/matlab-analysis/!svn/ver/312/trunk/users/jon/G%20analysis/ValtAnalyzer.m
+END
+correlatedGnoise2mean.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/G%20analysis/correlatedGnoise2mean.m
+END
+FamilyGploter.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/G%20analysis/FamilyGploter.m
+END
+Gstep.m
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/G%20analysis/Gstep.m
+END
+Gextractor.m
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/G%20analysis/Gextractor.m
+END

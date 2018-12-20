@@ -1,0 +1,470 @@
+classdef SpatialStimulus < handle
+    properties
+        inputParamsDir = '/Users/Shared/SpatialStimParams/'        
+        outputParamsDir = '~/acquisition/SpatialStimParams/'
+        inputParamsFile = 'TempParams.h5'
+        %savedParamsDir = '/Users/Greg/acquisition/'
+        %savedParamsDir = '/Users/Shared/SpatialStimDataFiles/'
+        MatlabCodeDir = '~/matlab/common/stim/'
+        testParamsDir = ''
+        GammaTableFileName = 'gamma_table.mat'
+        tempFile = 'TempParams.h5'
+        screenX = 800;
+        screenY = 600;
+        repositoryVersion
+        frameRate = 60; %frames / sec
+        flipInterval; %actual acurate flip interval (s)
+        windPtr
+        imageArray = [];
+        movieFrames
+        gammaTable
+        lastEpoch = -1;
+    end
+    
+    methods
+        
+        function self = SpatialStimulus(varargin)
+            %load gamma table
+            temp = load([self.MatlabCodeDir self.GammaTableFileName]);
+            self.gammaTable = temp.gamma;
+            
+            if isempty(varargin) || strcmp(varargin{1}, 'test') %stimulus run loop
+                %disable white startup screen
+                Screen('Preference', 'VisualDebuglevel', 3);
+                
+                
+                %get repositoryVersion
+                try
+                    curDir = pwd;
+                    cd(self.MatlabCodeDir);
+                    [err, changedFiles] = unix('svn status');
+                    if ~isempty(changedFiles)
+                        disp('Warning: stimulus files have changed since last revision');
+                        disp(changedFiles);
+                    end
+                    [err, rev_str] = unix('svn info | grep Revision');
+                    [null, revNum] = strtok(rev_str);
+                    self.repositoryVersion = str2double(revNum);
+                    cd(curDir);
+                catch
+                    disp('Error getting repository information');
+                    self.repositoryVersion = -1;
+                end
+                
+                %stim screen is 1
+                %self.windPtr = Screen('OpenWindow', 1, [0, 0, 0], [0, 0, self.screenX, self.screenY]);
+                if isempty(varargin) || ~strcmp(varargin{1}, 'test') %run loop
+                    if nargin == 1
+                        self.testParamsDir = varargin{1}; 
+                    end
+
+                    self.windPtr = Screen('OpenWindow',1, [0, 0, 0]);
+
+                elseif ~isempty(varargin) && strcmp(varargin{1}, 'test') %run test loop
+                    if nargin>1
+                        self.screenX = varargin{2}(1);
+                        self.screenY = varargin{2}(2);
+                        if nargin > 2
+                           self.testParamsDir = varargin{3}; 
+                        end
+                    else
+                        self.screenX = 200;
+                        self.screenY = 150;
+                    end
+                    rect = Screen('rect',0);
+                    self.windPtr = Screen('OpenWindow',0,[0, 0, 0], [0, rect(4)-self.screenY, self.screenX*3, rect(4)]);
+                end
+                
+                %getAccurate estimate of frame rate
+                disp('Testing monitor and getting frame rate')
+                self.flipInterval =Screen('GetFlipInterval', self.windPtr, 100);
+                format long;
+                self.flipInterval
+                %self.flipInterval = 0.016764535786566;
+                disp('done')
+                
+                %set both screens to black
+                blankPtr=Screen('MakeTexture', self.windPtr, 0);
+                %fix this line
+                Screen('DrawTextures', self.windPtr, [blankPtr, blankPtr, blankPtr], ...
+                            [], [ 0, 0, self.screenX, self.screenY;
+                            self.screenX, 0, self.screenX*2, self.screenY;
+                            self.screenX*2, 0, self.screenX*3, self.screenY;]', [0;0;0], 0);
+                Screen('Flip',self.windPtr);
+                Screen('Close', blankPtr);
+                %run the display loop
+                self.displayLoop;
+                
+            elseif strcmp(varargin{1}, 'WriteDefaults')
+                stimClass = varargin{2};
+                props = properties(stimClass); 
+                params = struct;
+                stringParams = {'executableString','epochNums','parameterList'};
+                for i=1:length(props)
+                    if strmatch(props{i}, stringParams)
+                        params.(props{i}) = ' ';
+                    else
+                        params.(props{i}) = 0; %maybe read deafult from file
+                    end
+                end
+                params.stimClass = stimClass;
+                fileName = [stimClass, '_params.h5'];
+                curDir = pwd;
+                cd(self.outputParamsDir);
+                hdf5save(fileName,'params','params');
+                cd(curDir);
+            elseif strfind(varargin{1}, 'getFrame') %get image array of single frame or all frames
+                paramsStruct = varargin{2};
+                writeAvi = 0;
+                
+                %for now do this with an onscreen window, eventually use an
+                %offscreen window
+                tempPtr = Screen('OpenWindow',0,[0, 0, 0], [0, 0, self.screenX, self.screenY]);
+                
+                %add parameters from this class
+                paramsStruct.screenX = self.screenX;
+                paramsStruct.screenY = self.screenY;
+                paramsStruct.frameRate = self.frameRate;
+                paramsStruct.repositoryVersion = self.repositoryVersion;
+                paramsStruct.gammaTable = self.gammaTable;
+                paramsStruct.frameInterval = self.flipInterval;
+                
+                %initialize display function with params struct
+                StimClass = eval([paramsStruct.stimClass '(tempPtr, paramsStruct)']);
+
+                if strcmp(varargin{1}, 'getFrame') %just one frame
+                    %warning: rand number state will be wrong!
+                    
+                    frameNum = varargin{3};
+                    %get the texture for the correct frame
+                    StimClass.frameCounter = frameNum;
+                    drawParams=StimClass.nextFrame;
+                    texturePtr = drawParams.tex;
+                    %draw frame
+                    Screen('DrawTexture', tempPtr, texturePtr, ...
+                        [], [0, 0, self.screenX, self.screenY], 0, 0);
+                    
+                    %get the image array (RGB)
+                    imageArray = Screen('getImage',tempPtr);
+                    
+                    %take only the first level (for B&W)
+                    self.imageArray = squeeze(imageArray(:,:,1)');
+                else %all frames
+                    %get nFrames
+                    nFrames = paramsStruct.spatial_prepts + paramsStruct.spatial_stimpts + paramsStruct.spatial_postpts;
+                    self.imageArray = uint8(zeros(self.screenX, self.screenY, nFrames));
+                    
+                    if length(varargin)==3
+                        writeAvi = 1;
+                        movie_filename = varargin{3};
+                        self.movieFrames = repmat(struct('cdata',[],'colormap',[]),1,nFrames);
+                    end
+                    
+                    %Change this to use Screen('OpenVideoCapture')                    
+                    for i=1:nFrames
+                        %i
+                        %get next frame from stim class
+                        drawParams=StimClass.nextFrame;
+                        texturePtr = drawParams.tex;
+                        if isfield(drawParams,'rotationAngle')
+                            rotationAngle = drawParams.rotationAngle;
+                        else
+                            rotationAngle = 0;
+                        end
+                        if ~texturePtr %error
+                            disp('Stimulus Error');
+                            break;
+                        end
+                        %draw frame
+                        Screen('DrawTexture', tempPtr, texturePtr, ...
+                            [], [0, 0, self.screenX, self.screenY], rotationAngle, 0);
+                        
+                        %get the image array (RGB)
+                        imageArray = Screen('getImage',tempPtr);
+                        
+                        Screen('Flip',tempPtr);
+                        
+                        %keyboard;
+                        %take only the first level (for B&W)
+                        self.imageArray(:,:,i) = squeeze(imageArray(:,:,1)'); %#ok<PROP>
+                        if writeAvi, self.movieFrames(i) = im2frame(imageArray); end
+                        %Screen('Close', texturePtr) %textures
+                    end
+                end
+                if writeAvi
+                    %write movie file
+                    movie2avi(self.movieFrames,movie_filename,'fps',self.frameRate);
+                end
+                
+                %Clear teture and close screen
+                Screen('Close') %textures
+                Screen('CloseAll') %screens
+            end
+        end
+        
+        function displayLoop(self)            
+            if isempty(self.testParamsDir) %normal run
+                %delete temp file if it exists
+                %[self.inputParamsDir,self.tempFile]
+                %if exist([self.inputParamsDir,self.tempFile], 'file')
+                %    delete([self.inputParamsDir,self.tempFile]);
+                %end
+                
+                %setup queue
+                RSMessageQueue('setup','SpatialStimParamsFromIgor');
+                
+                %make sure queue is clear
+                paramsStruct = RSMessageQueue('poll');
+                while ~isempty(paramsStruct)
+                    paramsStruct = RSMessageQueue('poll');
+                end
+                
+            else %test dir run                
+                %delete old data file
+                oldDataFile = [self.testParamsDir 'testDataFile_spatial.h5'];
+                if exist(oldDataFile, 'file')
+                    delete(oldDataFile)
+                end                
+                %find all .h5 files      
+                D = dir(self.testParamsDir);
+                z=1;
+                for i=1:length(D)
+                    if ~isempty(strfind(D(i).name, '.h5'))
+                        testFiles{z} = D(i).name;
+                        z=z+1;
+                    end                   
+                end
+                fileInd = 1;
+                pause(3); %wair for screen to initialize
+            end
+            doneWithLoop = 0;            
+            err = 0;
+            while ~doneWithLoop
+                initerror = 0;
+                
+                try %try to read params and init stim
+                    %wait for params file by checking if temp file exists
+
+                    if isempty(self.testParamsDir) %if normal run loop                    
+                        %fpath = [self.inputParamsDir self.inputParamsFile];
+                        %waitForFileExist(self.inputParamsDir,self.tempFile);
+                        paramsStruct = [];                        
+                        while isempty(paramsStruct)
+                            paramsStruct = RSMessageQueue('poll');
+                            pause(0.05); %50 ms timeout
+                        end
+                        paramsStruct = cellArraysToMatricesInStruct(paramsStruct);
+                    else %get file from test dir
+                        %broke this with the notifications stuff
+                        fpath = [self.testParamsDir testFiles{fileInd}];
+                        disp(['Running ' testFiles{fileInd}]);
+                        if fileInd==length(testFiles)
+                            doneWithLoop = 1;
+                        end
+                        fileInd = fileInd+1;                        
+                    end
+                    
+                    %load params struct
+%                     loaderr = 1;
+%                     while loaderr
+%                         try
+%                             tempVar = hdf5load(fpath);
+%                             loaderr = 0;
+%                         catch
+%                             disp('params file load error');
+%                             WaitSecs(0.05); 
+%                             loaderr = 1;
+%                         end
+%                     end
+%                     delete([self.inputParamsDir,self.tempFile]);
+%                     
+%                     %delete tempParams after loading it
+%                     %delete(fpath);
+%                     
+%                     paramsStruct = tempVar.params;
+                    
+                    if ~isempty(self.testParamsDir) %add params for test dir stim
+                        paramsStruct.saveON = 1; 
+                        paramsStruct.InitStimulusSequence = 1;
+                        paramsStruct.NumCycles = 1;
+                        paramsStruct.dataFileName = [self.testParamsDir 'testDataFile'];
+                        paramsStruct.epochNumber = fileInd-1;
+                    end
+                                        
+                    %check if this is the 'quit' stimulus
+                    %eventually, let's find a better way to quit
+                    if strcmp(paramsStruct.stimClass,'quit')
+                        break;
+                    end
+                    
+                    if ~isfield(paramsStruct, 'isAnalysis') %if spatial stim, not analysis
+                        disp('running stim')
+                        %add parameters from this class
+                        paramsStruct.screenX = self.screenX;
+                        paramsStruct.screenY = self.screenY;
+                        paramsStruct.repositoryVersion = self.repositoryVersion;
+                        paramsStruct.gammaTable = self.gammaTable;
+                        %initialize display function with params struct
+                        windPtr = self.windPtr;
+                        isAnalysis = 0;
+                        StimClass = eval([paramsStruct.stimClass '(windPtr, paramsStruct)']);                        
+                    else %this is an analysis 
+                        disp('running analysis')
+                        isAnalysis = 1;
+                        paramsStruct.frameRate = self.frameRate ;
+                        StimClass = eval([paramsStruct.stimClass '(paramsStruct)']);                        
+                    end
+                    %if initerror, initerror = 1; err = 1; end
+                    
+                catch thiserr %init error
+                    disp(['Stimulus startup error: ']);
+                    disp(thiserr.message);
+                    disp(thiserr.stack(1).file);
+                    disp(thiserr.stack(1).name);
+                    disp(thiserr.stack(1).line);
+                    initerror = 1;
+                    err = 1;
+                    %isAnalysis = 0;
+                end
+                
+                %if saveON (and not analysis script), append to data file
+                if ~isAnalysis && paramsStruct.saveON == 1 && initerror == 0                    
+                    %get flle path and name, save by epoch name
+                    DataFilePath = regexprep(paramsStruct.dataFileName, ':', '/'); %fix IGOR path issues
+                    %strip off fields we don't want to save
+                    fieldsToRemove = {'saveON', 'InitStimulusSequence', 'NumCycles', 'gammaTable', 'dataFileName'};
+                    paramsStruct = rmfield(paramsStruct,fieldsToRemove);                                        
+                    %get flle path and name, save by epoch name
+                    if self.lastEpoch==paramsStruct.epochNumber %igor error case of some kind, this should not happen
+                        epochParamsName = ['params_epoch' num2str(paramsStruct.epochNumber) '_B'];    
+                    else
+                        epochParamsName = ['params_epoch' num2str(paramsStruct.epochNumber)];
+                    end
+                    eval([epochParamsName '= paramsStruct;']);
+                    [data_path, fname] = fileparts(DataFilePath);
+                    if ~isempty(self.testParamsDir) %test folder
+                        curDir = pwd;
+                        cd(data_path);                        
+                        dataFileName = [fname '_spatial.h5'];
+                        hdf5append(dataFileName,epochParamsName,epochParamsName);
+                        cd(curDir);
+                    else %normal case
+                        dataFileName = ['/Volumes/' data_path '/' fname '_spatial.h5'];
+                        hdf5append(dataFileName,epochParamsName,epochParamsName);
+                    end                    
+                    self.lastEpoch = paramsStruct.epochNumber;
+                end
+                
+                %ready to display stimulus
+                if ~isAnalysis && initerror==0                    
+                    %hack: waiting fot IGOR to init
+                    Priority(0);
+                    pause(.2);
+                    %Priority(0);
+                                        
+                    try
+                        %get nFrames
+                        nFrames = paramsStruct.spatial_prepts + paramsStruct.spatial_stimpts + paramsStruct.spatial_postpts;
+                        
+                        %display:
+                        %first set priority
+                        %set priority
+                        priorityLevel=MaxPriority(self.windPtr);
+                        Priority(priorityLevel);
+                        
+                        misses = 0;
+                        interval = zeros(1,nFrames);
+                        frameTime = Screen('Flip',self.windPtr);
+                        lastFrameTime = frameTime;
+                        tic;                        
+                        %for each frame
+                        for i=1:nFrames
+                            %get next frame from stim class
+                            drawParams=StimClass.nextFrame;
+                            %get the texture
+                            texturePtr = drawParams.tex;
+                            %get other params
+                            if isfield(drawParams,'rotationAngle')
+                                rotationAngle = drawParams.rotationAngle;
+                            else
+                                rotationAngle = 0;
+                            end
+                            if ~texturePtr %error
+                                disp('Stimulus Error');
+                                err = 1;
+                                break;
+                            end
+                            
+                            %make "code" texture for secondary monitor
+                            codeGreyLevel = round((61 - rem(i,60))*255/60);
+                            codeTexturePtr=Screen('MakeTexture', self.windPtr, codeGreyLevel);
+                            
+                            %draw both
+                            %Screen('DrawTextures', windPtr, [texturePtr, codeTexturePtr], ...
+                            %    [], [0, 0, self.screenX, self.screenY; self.screenX, 0, self.screenX*2, self.screenY]', [rotationAngle;0], 0);
+                            
+                            %3 screens
+                            Screen('DrawTextures', self.windPtr, [texturePtr, codeTexturePtr, texturePtr], ...
+                                [], [ 0, 0, self.screenX, self.screenY;
+                                self.screenX, 0, self.screenX*2, self.screenY;
+                                self.screenX*2, 0, self.screenX*3, self.screenY;]', [rotationAngle;0;rotationAngle], 0);
+                            Screen('DrawingFinished',self.windPtr);
+                            %frameTime = Screen('Flip',self.windPtr,[],2);
+                            frameTime = Screen('Flip',self.windPtr,lastFrameTime+self.flipInterval*.5,2);
+                            if (frameTime - lastFrameTime) > .017
+                                misses = misses + 1;
+                                disp(['dropped frame ' num2str(i)]);
+                            end
+                            %interval(i) = lastFrameTime - frameTime;
+                            lastFrameTime = frameTime;
+                            %close the code texture pointer
+                            %maybe have an option here to close the other texture
+                            %pointers - might be needed for long stimuli
+                            Screen('Close', codeTexturePtr);
+                        end
+                        totalTime = toc;
+                        %disp(['Mean Frame Time = ' num2str((totalTime / nFrames) * 1000) ' ms']);
+                        disp([num2str(misses) ' missed frames']); 
+                        %make sure code frame is set back to black
+                        codeGreyLevel = 0;
+                        codeTexturePtr=Screen('MakeTexture', self.windPtr, codeGreyLevel);
+                        %3 screens
+                        Screen('DrawTextures', self.windPtr, [texturePtr, codeTexturePtr, texturePtr], ...
+                            [], [ 0, 0, self.screenX, self.screenY;
+                            self.screenX, 0, self.screenX*2, self.screenY;
+                            self.screenX*2, 0, self.screenX*3, self.screenY;]', [rotationAngle;0;rotationAngle], 0);
+                        %Screen('DrawTextures', windPtr, [texturePtr, codeTexturePtr], ...
+                        %    [], [0, 0, self.screenX, self.screenY; self.screenX, 0, self.screenX*2, self.screenY]', [rotationAngle;0], 0);
+                        Screen('Flip',self.windPtr,[],2);                        
+                        %reset priority
+                        Priority(0);
+
+                        %Clear textures
+                        Screen('Close');
+                    catch thiserr
+                        disp('Stimulus Run Error');
+                        disp(thiserr.message);
+                        disp(thiserr.stack(1).file);
+                        disp(thiserr.stack(1).name);
+                        disp(thiserr.stack(1).line);
+                        err = 1;
+                    end
+                end %if not init error
+                
+                %figure;
+                %plot(interval);
+                %drawnow;
+                %pause;                 
+            end %infinite loop for now
+            %for test directory
+            if err==0
+                disp('Stim Passed Test');
+            else
+                disp('Stim Failed Test');
+            end
+            %clear screen
+            Screen('CloseAll');
+        end %displayLoop
+        
+    end %methods
+end %class

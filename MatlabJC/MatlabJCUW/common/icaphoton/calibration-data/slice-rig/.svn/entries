@@ -1,0 +1,41 @@
+8
+
+dir
+378
+https://rieke-server.physiol.washington.edu/svn/matlab-analysis/trunk/common/icaphoton/calibration-data/slice-rig
+https://rieke-server.physiol.washington.edu/svn/matlab-analysis
+
+
+
+2008-11-14T22:42:38.119215Z
+1
+dacc
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+ec1fb8b4-1bd7-44a3-b676-8918235e6431
+
+BlueNDF.mat
+file
+
+
+
+
+2009-06-30T18:21:50.000000Z
+72bc85299762de6434042aff3f8f7364
+2008-11-14T22:42:38.119215Z
+1
+dacc
+has-props
+

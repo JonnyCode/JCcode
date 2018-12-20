@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/epoch-tree-gui/test
+END
+testEpochTreeGUINoData.m
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/epoch-tree-gui/test/testEpochTreeGUINoData.m
+END
+testEpochTreeGUI.m
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/matlab-analysis/!svn/ver/223/trunk/common/icaphoton/epoch-tree-gui/test/testEpochTreeGUI.m
+END

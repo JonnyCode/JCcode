@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/spike%20analysis
+END
+PsthVar.m
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/matlab-analysis/!svn/ver/312/trunk/users/jon/spike%20analysis/PsthVar.m
+END
+ISIdisAnalysis.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/spike%20analysis/ISIdisAnalysis.m
+END
+BurstPntFinder.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/spike%20analysis/BurstPntFinder.m
+END
+InoiseAnalysis.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/spike%20analysis/InoiseAnalysis.m
+END
+SpikeDetection.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/spike%20analysis/SpikeDetection.m
+END
+SpikeMatcherFast.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/matlab-analysis/!svn/ver/287/trunk/users/jon/spike%20analysis/SpikeMatcherFast.m
+END
+NewSpksAnalysis.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/spike%20analysis/NewSpksAnalysis.m
+END
+PSTHmaker.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/spike%20analysis/PSTHmaker.m
+END
+SpkTrigCurr.m
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/spike%20analysis/SpkTrigCurr.m
+END
+SpikeMatcher.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/matlab-analysis/!svn/ver/287/trunk/users/jon/spike%20analysis/SpikeMatcher.m
+END
+SpikeDetection_WC.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/matlab-analysis/!svn/ver/50/trunk/users/jon/spike%20analysis/SpikeDetection_WC.m
+END

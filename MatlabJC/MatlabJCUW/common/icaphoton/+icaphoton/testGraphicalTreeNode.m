@@ -1,0 +1,1 @@
+../epoch-tree-gui/graphicalTree/test/testGraphicalTreeNode.m
